@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './home/info/info.component';
 import { AuthGuardService } from './service/auth-guard.service';
+import { AddinfoComponent } from './home/addinfo/addinfo.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -17,8 +18,8 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     children : [
       {path: '', redirectTo: 'info', pathMatch: 'full'},
-      
       {path: 'info', component: InfoComponent},      
+      {path: 'addinfo', component: AddinfoComponent},    
     ]
   },
 

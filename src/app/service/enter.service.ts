@@ -28,4 +28,13 @@ export class EnterService implements OnInit{
       .set("pageSize", pageSize.toString());
     return this.http.post("http://localhost:8080/leave/load/doneList", getLoadDoneListInfo, httpOptions);
   }
+  public addinfopicture(name, dynasty, place, type){
+    console.log(name);
+    const pictureinfo = new HttpParams().
+    set("name", name).
+    set("dynasty", dynasty).
+    set("place", place).
+    set("type", type);
+    return this.http.post('http://localhost:8080/leave/add/addpic', pictureinfo, httpOptions);
+  }
 }

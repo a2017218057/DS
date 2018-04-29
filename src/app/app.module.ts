@@ -13,6 +13,9 @@ import { InfoComponent } from './home/info/info.component';
 import { EnterService } from './service/enter.service';
 import { CheckUserService } from './service/check-user.service';
 import { AuthGuardService } from './service/auth-guard.service';
+import { AddinfoComponent } from './home/addinfo/addinfo.component';
+import { AddpictureComponent } from './home/addinfo/addpicture/addpicture.component';
+
 
 
 @NgModule({
@@ -21,7 +24,9 @@ import { AuthGuardService } from './service/auth-guard.service';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    InfoComponent
+    InfoComponent,
+    AddinfoComponent,
+    AddpictureComponent,
   ],
   imports: [
     BrowserModule,
