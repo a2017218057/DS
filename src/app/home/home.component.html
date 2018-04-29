@@ -1,0 +1,61 @@
+<nz-layout style="height:100%;">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo" style="text-align: center">
+      <a [routerLink]="['info1']"><img src="../assets/zorro.svg" style="width: 32px"></a>
+    </div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+      <li nz-submenu>
+        <span title><i class="anticon anticon-edit"></i><span class="nav-text">添加数据</span></span>
+        <ul>
+          <li nz-menu-item ><a [routerLink]="['leave']">填写信息</a></li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-plus-circle-o"></i><span class="nav-text">查询信息</span></span>
+        <ul>
+          <li nz-menu-item><a [routerLink]="['overtime']">填写内容</a></li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-inbox"></i><span class="nav-text">审核管理</span></span>
+        <ul>
+          <li nz-menu-item><a [routerLink]="['review']">审核列表</a></li>
+        </ul>
+      </li>
+      <li nz-submenu>
+        <span title><i class="anticon anticon-question-circle-o"></i><span class="nav-text">帮助信息</span></span>
+        <ul>
+          <li nz-menu-item><a routerLink="help">帮助信息</a></li>
+        </ul>
+      </li>
+      <!--<li nz-menu-item><span><i class="anticon anticon-file"></i><span class="nav-text">加班申请</span></span></li>-->
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background: #108ee9; padding:0;">
+      <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
+      <nz-dropdown  [nzPlacement]="'bottomRight'"  style="float:right">
+        <div nz-dropdown>
+          <div class="myMenuTrigger" style="height:40px;margin: 12px;border-radius: 3px;display:flex;/*Flex布局*/display: -webkit-flex; /* Safari */align-items:center;/*指定垂直居中*/">
+            <nz-avatar  nzIcon="user" style="margin:8px"></nz-avatar>
+            <!--<span style="font-size: 16px;color: white;margin-right: 8px">Admin</span>-->
+          </div>
+        </div>
+        <ul nz-menu>
+          <li nz-menu-item (click)="log('1st menu item')"><a [routerLink]="['info']"><i class="anticon anticon-user" style="margin-right: 5px"></i>个人信息</a></li>
+          <li nz-menu-item (click)="logout()"><i class="anticon anticon-logout" style="margin-right: 5px"></i>注销</li>
+        </ul>
+      </nz-dropdown>
+    </nz-header>
+    <nz-content style="margin:0 16px;">
+      <!--<nz-breadcrumb style="margin:12px 0;">-->
+        <!--<nz-breadcrumb-item>User</nz-breadcrumb-item>-->
+        <!--<nz-breadcrumb-item>Bill</nz-breadcrumb-item>-->
+      <!--</nz-breadcrumb>-->
+      <div style="padding:24px; background: #fff; min-height: 500px;margin-top: 20px">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer style="text-align: center;">Ant Design ©2017 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>

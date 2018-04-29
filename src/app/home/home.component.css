@@ -1,0 +1,49 @@
+.logo {
+    height: 32px;
+    /*background: #333;*/
+    border-radius: 6px;
+    margin: 16px;
+  }
+  
+  .ant-layout-sider-collapsed .nav-text {
+    display: none;
+  }
+  
+  .ant-layout-sider-collapsed .ant-menu-submenu-title:after {
+    display: none;
+  }
+  
+  .ant-layout-sider-collapsed .anticon {
+    font-size: 16px;
+    margin-left: 8px;
+  }
+  
+  .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: color .3s;
+    color:#fff
+  }
+  
+  /*.trigger:hover{*/
+  /*color: #108ee9;*/
+  /*}*/
+  
+  .myMenuTrigger{
+    cursor: pointer;
+    transition: background-color .3s;
+    background-color: #108ee9;
+  }
+  
+  .myMenuTrigger:hover {
+    /*color: #108ee9;*/
+    /*opacity:0.5;*/
+    /*cursor: pointer;*/
+    /*transition: color .3s;*/
+    background-color: rgb(76,166,235);
+  }
+  
+  
+  
