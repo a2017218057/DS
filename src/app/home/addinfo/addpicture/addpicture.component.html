@@ -1,12 +1,33 @@
-<form nz-form [nzType]="'horizontal'" [formGroup]="validateForm" (ngSubmit)="_submitForm()">
+<form  [hidden]="submitted" nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+    <div class="clearfix">
+        <div nz-form-label nz-col [nzSpan]="5">
+            <label>图片</label>
+          </div>
+        <nz-upload
+        nzAction="http://localhost:8080/leave/add/uploadpic"
+        nzListType="picture-card"
+        [(nzFileList)]="fileList"
+        [nzShowButton]="fileList.length < 1"
+        [nzPreview]="handlePreview"
+        [nzHeaders]="multipart/form-data"      
+        [nzBeforeUpload]="beforeUpload"
+        (nzChange)="handleChange($event)">
+          <i class="anticon anticon-plus"></i>
+          <div class="ant-upload-text" >Upload</div>
+      </nz-upload>
+      <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
+        <ng-template #modalContent>
+          <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+        </ng-template>
+      </nz-modal>
+      </div>
   <div nz-form-item nz-row>
     <div nz-form-label nz-col [nzSpan]="5">
       <label>名称</label>
     </div>
     <div nz-form-control [nzValidateStatus]="'success'" nzHasFeedback nz-col [nzSpan]="12">
       <nz-input formControlName="name" [nzPlaceHolder]="'用户名'" [ngModel]="'The content'" [nzSize]="'large'" name="successValid">
-      </nz-input>
-      
+      </nz-input>     
     </div>
   </div>
   <div nz-form-item nz-row>
@@ -39,7 +60,7 @@
   </div>
   <div nz-form-item nz-row style="margin-bottom:8px;">
     <div nz-form-control nz-col [nzSpan]="14" [nzOffset]="6">
-      <button nz-button [nzSize]="'large'" [nzType]="'primary'">Register</button>
+      <button nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="_submitForm()">Register</button>
     </div>
   </div>
 </form>

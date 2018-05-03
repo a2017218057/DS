@@ -15,6 +15,7 @@ import { CheckUserService } from './service/check-user.service';
 import { AuthGuardService } from './service/auth-guard.service';
 import { AddinfoComponent } from './home/addinfo/addinfo.component';
 import { AddpictureComponent } from './home/addinfo/addpicture/addpicture.component';
+import { UpdateinfoComponent } from './home/addinfo/updateinfo/updateinfo.component';
 
 
 
@@ -27,6 +28,7 @@ import { AddpictureComponent } from './home/addinfo/addpicture/addpicture.compon
     InfoComponent,
     AddinfoComponent,
     AddpictureComponent,
+    UpdateinfoComponent,
   ],
   imports: [
     BrowserModule,

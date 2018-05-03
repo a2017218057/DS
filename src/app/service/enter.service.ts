@@ -4,9 +4,10 @@ import {Observable} from "rxjs/Observable";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/x-www-form-urlencoded',
+    'Content-Type':  'application/x-www-form-urlencoded;charset=utf-8',
     
-  })
+  }),
+  withCredentials: true
 };
 @Injectable()
 export class EnterService implements OnInit{
@@ -28,13 +29,37 @@ export class EnterService implements OnInit{
       .set("pageSize", pageSize.toString());
     return this.http.post("http://localhost:8080/leave/load/doneList", getLoadDoneListInfo, httpOptions);
   }
-  public addinfopicture(name, dynasty, place, type){
+  public addinfopicture(name, dynasty, place, type, picname, smallpic){
     console.log(name);
     const pictureinfo = new HttpParams().
     set("name", name).
     set("dynasty", dynasty).
     set("place", place).
-    set("type", type);
+    set("type", type).
+    set("picname", picname).
+    set("smallpic",smallpic);
     return this.http.post('http://localhost:8080/leave/add/addpic', pictureinfo, httpOptions);
+  }
+  public getLoadDropList(username, pageIndex = 1, pageSize = 10){
+    const getLoadDropList = new HttpParams()
+    .set("username", username)
+    .set("page", pageIndex.toString())
+    .set("pageSize", pageSize.toString());
+  return this.http.post("http://localhost:8080/leave/apply/draftList", getLoadDropList, httpOptions);
+  }
+  public deletInfo(uid){
+    console.log("delet");
+    const deleteInfo = new HttpParams().set("uid", uid);
+    return this.http.post('http://localhost:8080/leave/apply/delete', deleteInfo, httpOptions);
+  }
+  public updateInfo(params){
+    let queryString = "";
+    for (const key in params){
+      queryString += key + "=" + params[key] + "&";
+    }
+    queryString = queryString.substr(0, queryString.length - 1);
+    const updateInfo = new HttpParams({fromString : queryString});
+    return this.http.post("http://localhost:8080/leave/apply/modify", updateInfo, httpOptions);
+
   }
 }

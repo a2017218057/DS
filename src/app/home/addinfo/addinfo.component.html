@@ -4,20 +4,22 @@
       <nz-tab >
         <ng-template #nzTabHeading>
           <i [ngClass]="'anticon anticon-camera'"></i>
-          草稿箱
-        </ng-template>
+          上传图片
+        </ng-template> 
+        
         <app-addpicture></app-addpicture>
+        
       </nz-tab>
       <nz-tab>
         <ng-template #nzTabHeading>
           <i [ngClass]="'anticon anticon-save'"></i>
-          已提交
+          上传视频
         </ng-template>
         <!--<app-ask-leave-done></app-ask-leave-done>-->
       </nz-tab>
       <ng-template #tabBarExtraContent>
         <button nz-button [nzType]="'primary'" (click)="showModal()">
-          <i class="anticon anticon-plus"></i><span>添加请假申请</span>
+          <i class="anticon anticon-plus"></i><span>xxxxxxxx</span>
         </button>
         <nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)">
           <ng-template #modalTitle>

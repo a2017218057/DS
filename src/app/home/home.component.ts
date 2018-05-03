@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { CheckUserService } from '../service/check-user.service';
 import {NzMessageService} from "ng-zorro-antd";
+import { Jsonp, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,14 +12,23 @@ import {NzMessageService} from "ng-zorro-antd";
 })
 export class HomeComponent implements OnInit {
 
-  isCollapsed = true;
+  selectedOption;
+  searchOptions = [];
+  isCollapsed = false;
+  triggerTemplate = null;
   
   
     constructor(private router: Router,
                 private checkUserService: CheckUserService,
-                private nzMessageService: NzMessageService ){}
+                private nzMessageService: NzMessageService,
+                ){}
 
   ngOnInit() {
+    
+  }
+  searchChange(searchText) {
+    const query = encodeURI(searchText);
+    console.log(query)
   }
   /*logout(){
     if (this.checkUserService.isLogin) {

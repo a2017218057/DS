@@ -1,9 +1,9 @@
 <nz-layout style="height:100%;">
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
     <div class="logo" style="text-align: center">
-      <a [routerLink]="['info1']"><img src="../assets/zorro.svg" style="width: 32px"></a>
+      <a [routerLink]="['info']"><img src="../assets/zorro.svg" style="width: 32px"></a>
     </div>
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu>
         <span title><i class="anticon anticon-edit"></i><span class="nav-text">添加数据</span></span>
         <ul>
@@ -17,9 +17,9 @@
         </ul>
       </li>
       <li nz-submenu>
-        <span title><i class="anticon anticon-inbox"></i><span class="nav-text">审核管理</span></span>
+        <span title><i class="anticon anticon-inbox"></i><span class="nav-text">个人上传</span></span>
         <ul>
-          <li nz-menu-item><a [routerLink]="['review']">审核列表</a></li>
+          <li nz-menu-item><a [routerLink]="['info']">上传列表</a></li>
         </ul>
       </li>
       <li nz-submenu>
@@ -34,6 +34,22 @@
   <nz-layout>
     <nz-header style="background: #108ee9; padding:0;">
       <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
+      <nz-select 
+      style="width: 200px;padding:0 1%;margin:0"
+      nzAllowClear
+      [nzPlaceHolder]="'input search text'"
+      [nzFilter]="false"
+      [(ngModel)]="selectedOption"
+      (nzSearchChange)="searchChange($event)"
+      [nzNotFoundContent]="'无法找到'"
+      nzShowSearch>
+      <nz-option
+        *ngFor="let option of searchOptions"
+        [nzLabel]="option[0]"
+        [nzValue]="option[0]"
+        >
+      </nz-option>
+    </nz-select>
       <nz-dropdown  [nzPlacement]="'bottomRight'"  style="float:right">
         <div nz-dropdown>
           <div class="myMenuTrigger" style="height:40px;margin: 12px;border-radius: 3px;display:flex;/*Flex布局*/display: -webkit-flex; /* Safari */align-items:center;/*指定垂直居中*/">
