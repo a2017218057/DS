@@ -4,12 +4,12 @@
             <label>图片</label>
           </div>
         <nz-upload
-        nzAction="http://localhost:8080/leave/add/uploadpic"
+        nzAction="http://localhost:3000/posts/"
         nzListType="picture-card"
         [(nzFileList)]="fileList"
         [nzShowButton]="fileList.length < 1"
         [nzPreview]="handlePreview"
-        [nzHeaders]="multipart/form-data"      
+        [nzHeaders]="application/json"      
         [nzBeforeUpload]="beforeUpload"
         >
           <i class="anticon anticon-plus"></i>
