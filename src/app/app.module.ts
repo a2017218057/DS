@@ -16,6 +16,7 @@ import { AuthGuardService } from './service/auth-guard.service';
 import { AddinfoComponent } from './home/addinfo/addinfo.component';
 import { AddpictureComponent } from './home/addinfo/addpicture/addpicture.component';
 import { UpdateinfoComponent } from './home/addinfo/updateinfo/updateinfo.component';
+import { UploadpicService } from './service/uploadpic.service';
 
 
 
@@ -39,7 +40,7 @@ import { UpdateinfoComponent } from './home/addinfo/updateinfo/updateinfo.compon
     NgZorroAntdModule.forRoot(),
     AppRoutingModule,
   ],
-  providers: [EnterService,CheckUserService,AuthGuardService],
+  providers: [EnterService,CheckUserService,AuthGuardService,UploadpicService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
