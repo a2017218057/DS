@@ -21,7 +21,7 @@
       <label>名称</label>
     </div>
     <div nz-form-control [nzValidateStatus]="'success'" nzHasFeedback nz-col [nzSpan]="12">
-      <nz-input formControlName="nameUpdate"  [(ngModel)]="_name" [nzSize]="'large'" name="successValid">
+      <nz-input [nzDisabled]="true" formControlName="nameUpdate"  [(ngModel)]="_name" [nzSize]="'large'" name="successValid">
       </nz-input>     
     </div>
   </div>
@@ -30,7 +30,7 @@
       <label>时间（朝代）</label>
     </div>
     <div nz-form-control [nzValidateStatus]="'success'" nzHasFeedback nz-col [nzSpan]="12">
-      <nz-input formControlName="dynastyUpdate" [(ngModel)]="_dynasty" [nzSize]="'large'" name="successValid">
+      <nz-input [nzDisabled]="true" formControlName="dynastyUpdate" [(ngModel)]="_dynasty" [nzSize]="'large'" name="successValid">
       </nz-input>
     </div>
   </div>
@@ -39,7 +39,7 @@
       <label>发现地点</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control [nzValidateStatus]="'success'" nzHasFeedback>
-      <nz-input formControlName="placeUpdate" [(ngModel)]="_place" [nzSize]="'large'" name="successValid">
+      <nz-input [nzDisabled]="true" formControlName="placeUpdate" [(ngModel)]="_place" [nzSize]="'large'" name="successValid">
       </nz-input>
       <div nz-form-explain>I'm the content is being validating</div>
     </div>
@@ -49,7 +49,7 @@
       <label>类型</label>
     </div>
     <div nz-form-control nz-col [nzSpan]="12" [nzValidateStatus]="'success'" nzHasFeedback>
-      <nz-input formControlName="typeUpdate" [(ngModel)]="_type" [nzSize]="'large'" name="successValid">
+      <nz-input [nzDisabled]="true" formControlName="typeUpdate" [(ngModel)]="_type" [nzSize]="'large'" name="successValid">
       </nz-input>
     </div>
   </div>

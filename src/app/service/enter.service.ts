@@ -29,15 +29,15 @@ export class EnterService implements OnInit{
       .set("pageSize", pageSize.toString());
     return this.http.post("http://localhost:8080/leave/load/doneList", getLoadDoneListInfo, httpOptions);
   }
-  public addinfopicture(name, dynasty, place, type, picname, smallpic){
+  public addinfopicture(name, dynasty, place, type, pathdoc, pathpic){
     console.log(name);
     const pictureinfo = new HttpParams().
     set("name", name).
     set("dynasty", dynasty).
     set("place", place).
     set("type", type).
-    set("picname", picname).
-    set("smallpic",smallpic);
+    set("pathdoc", pathdoc).
+    set("pathpic",pathpic);
     return this.http.post('http://localhost:8080/leave/add/addpic', pictureinfo, httpOptions);
   }
   public getLoadDropList(username, pageIndex = 1, pageSize = 10){

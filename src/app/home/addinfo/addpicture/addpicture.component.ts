@@ -18,6 +18,9 @@ import { filter } from 'rxjs/operators';
 })
 export class AddpictureComponent implements OnInit {
   fileList: UploadFile[] = [];
+  fileList1: UploadFile[] = [];
+  pathdoc:any;
+  pathpic:any;
   f : any;
   picname: String;
   smallpic: String;
@@ -62,15 +65,16 @@ confirmForm (){
       else
       {
 
-     
+        this.handleUpload();
+        this.handleUpload1();  
       console.log(this.validateForm.value);
       console.log(this.picname);
       this.enterService.addinfopicture(this.validateForm.controls['name'].value,
                                        this.validateForm.controls['dynasty'].value,
                                       this.validateForm.controls['place'].value,
                                       this.validateForm.controls['type'].value,
-                                    this.picname,
-                                  this.smallpic).subscribe(
+                                    this.pathdoc,
+                                  this.pathpic).subscribe(
                                       data =>{
                                           if(data['errno'] === 0)
                                           {
@@ -112,6 +116,7 @@ confirmForm (){
     beforeUpload = (file: UploadFile): boolean => {
       console.log(file);
       console.log(this.fileList)
+      this.pathpic = "img/"+file.name;
       //this.fileList.push(file);
       this.f = file;
       return true;
@@ -179,7 +184,7 @@ confirmForm (){
       }*/
 
       
-      const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/pic', formData, {
+      const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploadpic', formData, {
          reportProgress: true
       });
       console.log(req)
@@ -192,6 +197,33 @@ confirmForm (){
         this.nzMessageService.error('upload failed.');
       });
     }
-    
+    beforeUpload1 = (file: UploadFile): boolean => {
+      //this.f = file;
+      this.pathdoc = "doc/"+file.name;
+      this.fileList1.push(file);
+      return false;
+    }
+    handleUpload1() { //文件
+      //this.fileList.push(this.f);
+      const formData = new FormData();
+      this.fileList1.forEach((file: any) => {
+        formData.append('file', file);
+      });
+      this.uploading = true;
+      // You can use any AJAX library you like
+      const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploaddoc', formData, {
+        // reportProgress: true
+      });
+      this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
+        console.log(event['body']['data']['path'])
+        this.pathpic = event['body']['data']['path'];
+        this.uploading = false;
+        this.nzMessageService.success('upload successfully.');
+      }, (err) => {
+        this.uploading = false;
+        this.nzMessageService.error('upload failed.');
+      });
+    } 
+  
 
 }

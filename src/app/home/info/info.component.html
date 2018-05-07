@@ -22,7 +22,7 @@
 <tbody nz-tbody>
 <tr nz-tbody-tr *ngFor="let data of nzTable.data" >
 <td nz-td style="height:61px">
-  <img src="http://localhost:8080/{{data.storagepicture}}"  />
+  <img src="http://localhost:8080/{{data.pathpic}}"  />
 </td>
 <td nz-td>{{data.name}}</td>
 <td nz-td>{{data.dynasty}}</td>
@@ -40,9 +40,7 @@
       <button nz-button [nzType]="'default'" [nzShape]="'circle'" (click)="showModal(data,'b')">
           <i class="anticon anticon-search"></i>
         </button>
-<button nz-button [nzType]="'default'"   (click)="showModal(data)" [nzShape]="'circle'" >
-<i class="anticon anticon-question-circle-o"></i>
-</button>
+
 </td>
 </tr>
 </tbody>
@@ -54,43 +52,8 @@
 <ng-template #modalContent>
 <!--{{json.stringify(model_data)}}-->
 <div *ngIf="model_data&&j === 'b'">
-    <i class="anticon anticon-check-circle-o" style="font-size: 16px;"></i>
-    
-    <table align="center" >
-        <tr style="height:150px">
-            <td >
-                <img style="height:200px" align="middle" src="http://localhost:8080/{{model_data.storagepicture}}"  />
-            </td>
-            
-          </tr>
-          
-      <tr style="height:50px">
-        <td>
-          <div>名称：{{model_data.name}}</div>
-        </td>
-      </tr>
-      <tr style="height:50px">
-          <td>
-            <div>朝代：{{model_data.dynasty}}</div>
-          </td>
-        </tr >
-        <tr style="height:50px">
-            <td>
-              <div>类型：{{model_data.type}}</div>
-            </td>
-          </tr>
-          <tr style="height:50px">
-              <td>
-                <div>上传时间：{{model_data.loadtime}}</div>
-              </td>
-            </tr>
-            <tr style="height:50px">
-                <td>
-                  <div>操作用户：{{model_data.id}}</div>
-                </td>
-              </tr>
-    </table>
-  
+
+    <app-checkinfo [currentData]="model_data"></app-checkinfo>
     
 </div>
 

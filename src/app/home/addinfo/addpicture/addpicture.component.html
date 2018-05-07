@@ -1,4 +1,20 @@
 <form  [hidden]="submitted" nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
+    <div nz-form-item nz-row>
+        <div nz-form-label nz-col [nzSpan]="5">
+          <label>文件</label>
+        </div>
+        <nz-upload
+        nzAction="http://localhost:3000/profile/"
+        [nzFileList]="fileList1"
+        [nzMultiple]="true"
+        [nzLimit]="2"
+        [nzBeforeUpload]="beforeUpload1">
+        <button nz-button *ngIf="fileList1.length<1">
+          <i class="anticon anticon-upload"></i><span>Upload</span>
+        </button>
+      </nz-upload>
+      </div>
+    
   <div nz-form-item nz-row>
         <div nz-form-label nz-col [nzSpan]="5">
             <label>图片</label>

@@ -4,6 +4,7 @@ import { EnterService } from '../../service/enter.service';
 import {NzModalService} from "ng-zorro-antd";
 import {NzMessageService} from 'ng-zorro-antd';
 import { UpdateinfoComponent } from '../addinfo/updateinfo/updateinfo.component';
+import { CheckinfoComponent } from '../addinfo/checkinfo/checkinfo.component';
 
 @Component({
   selector: 'app-info',
@@ -24,6 +25,7 @@ export class InfoComponent implements OnInit {
   isConfirmLoading = false;
 
   @ViewChild(UpdateinfoComponent) updateinfochild: UpdateinfoComponent;
+  @ViewChild(CheckinfoComponent) checkinfochild: CheckinfoComponent;
 
   json = JSON;
   model_data;
@@ -90,15 +92,16 @@ export class InfoComponent implements OnInit {
   
   handleOk = (e) => {
 
-    if(this.j = 'b')
+    if(this.j == 'b')
     {
       this.isVisible = false;
+      console.log("进入b")
     }
-    if(this.j = 'a')
+    else if(this.j == 'a')
     {
 
     if (this.checkUserService.isLogin) {
-      
+      console.log("进入a")
             if (!this.updateinfochild.confirmFormForParen()) {
               return;
             }
@@ -137,16 +140,21 @@ export class InfoComponent implements OnInit {
    * @param e
    */
   handleCancel = (e) => {
-    this.isVisible = false;
-    this.updateinfochild.resetFormForParent();
+    if(this.j == 'b')
+    {
+      this.isVisible = false;
+    }
+    else if(this.j == 'a')
+    {
+      this.isVisible = false;
+      this.updateinfochild.resetFormForParent();
+    }
   }
    /**
    * 显示 删除 提示框
    * @param data
    */
   showConfirm = (data) => {
-    console.log(data['storagepicture']);
-    console.log(data['uid']);
     let constance = this;
     let model = this.confirmServ.confirm({
       title  : '警告',

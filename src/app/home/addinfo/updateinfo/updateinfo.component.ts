@@ -17,7 +17,7 @@ export class UpdateinfoComponent implements OnInit {
       placeUpdate             : [ '', [ Validators.required ]],
       typeUpdate         : [ '', [ Validators.required ]],
       loadtimeUpdate           : [ '', [ Validators.required ]],
-      storagepictureUpdate           : [ '', [ Validators.required ]],
+      pathpicUpdate           : [ '', [ Validators.required ]],
       idUpdate           : [ '', [ Validators.required ]],
       uidUpdate          : [ '', [ Validators.required ]]
     });
@@ -32,7 +32,7 @@ export class UpdateinfoComponent implements OnInit {
   _place = null;
   _type = null;
   _loadtime = null;
-  _storagepicture = null;
+  _pathpic = null;
   _id = null;
   _uid = null;//自增字段
   ngOnChanges(changes: SimpleChanges): void {
@@ -44,7 +44,7 @@ export class UpdateinfoComponent implements OnInit {
       this._place = this.currentData.place;
       this._type = this.currentData.type;
       this._loadtime = this.currentData.loadtime;
-      this._storagepicture = "http://localhost:8080/"+this.currentData.storagepicture;
+      this._pathpic = "http://localhost:8080/"+this.currentData.pathpic;
       this._id = this.currentData.id;
       this._uid = this.currentData.uid;
       this.getFormControl("nameUpdate").markAsDirty();
@@ -97,7 +97,7 @@ export class UpdateinfoComponent implements OnInit {
       this._place = this.currentData.place;
       this._type = this.currentData.type;
       this._loadtime = this.currentData.loadtime;
-      this._storagepicture = "http://localhost:8080/"+this.currentData.storagepicture;
+      this._pathpic = "http://localhost:8080/"+this.currentData.pathpic;
       this._id = this.currentData.id;
       this._uid = this.currentData.uid;
       this.getFormControl("nameUpdate").markAsDirty();

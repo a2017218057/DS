@@ -17,6 +17,7 @@ import { AddinfoComponent } from './home/addinfo/addinfo.component';
 import { AddpictureComponent } from './home/addinfo/addpicture/addpicture.component';
 import { UpdateinfoComponent } from './home/addinfo/updateinfo/updateinfo.component';
 import { UploadpicService } from './service/uploadpic.service';
+import { CheckinfoComponent } from './home/addinfo/checkinfo/checkinfo.component';
 
 
 
@@ -30,6 +31,7 @@ import { UploadpicService } from './service/uploadpic.service';
     AddinfoComponent,
     AddpictureComponent,
     UpdateinfoComponent,
+    CheckinfoComponent,
   ],
   imports: [
     BrowserModule,
