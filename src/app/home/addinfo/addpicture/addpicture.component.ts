@@ -199,8 +199,15 @@ confirmForm (){
     }
     beforeUpload1 = (file: UploadFile): boolean => {
       //this.f = file;
+      const isLt43M = file.size / 1024 / 1024 < 43;
+    if (!isLt43M) {
+      this.nzMessageService.error('文件应小于43MB!');
+    }
+    else
+    {
       this.pathdoc = "doc/"+file.name;
       this.fileList1.push(file);
+    }
       return false;
     }
     handleUpload1() { //文件

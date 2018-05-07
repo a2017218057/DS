@@ -9,7 +9,7 @@
         [nzMultiple]="true"
         [nzLimit]="2"
         [nzBeforeUpload]="beforeUpload1">
-        <button nz-button *ngIf="fileList1.length<1">
+        <button nz-button *ngIf="fileList1.length<3">
           <i class="anticon anticon-upload"></i><span>Upload</span>
         </button>
       </nz-upload>
@@ -31,8 +31,6 @@
           <i class="anticon anticon-plus"></i>
           <div class="ant-upload-text" >Upload</div>
       </nz-upload>
-      <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" [disabled]="fileList.length == 0" style="margin-top: 16px"></button>
-      {{ uploading ? 'Uploading' : 'Start Upload' }}
       <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
         <ng-template #modalContent>
           <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />

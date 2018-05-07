@@ -90,7 +90,7 @@ export class UpdateinfoComponent implements OnInit {
         /**
    * 重置表单
    */
-  resetFormForParent() {
+    resetFormForParent() {
     if (this.currentData) {
       this._name = this.currentData.name;
       this._dynasty = this.currentData.dynasty;
