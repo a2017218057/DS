@@ -21,6 +21,8 @@ export class AddpictureComponent implements OnInit {
   fileList1: UploadFile[] = [];
   pathdoc:any;
   pathpic:any;
+  namedoc = null;
+  namepic = null;
   f : any;
   picname: String;
   smallpic: String;
@@ -64,31 +66,62 @@ confirmForm (){
       }
       else
       {
-
-        this.handleUpload();
-        this.handleUpload1();  
-      console.log(this.validateForm.value);
-      console.log(this.picname);
-      this.enterService.addinfopicture(this.validateForm.controls['name'].value,
-                                       this.validateForm.controls['dynasty'].value,
-                                      this.validateForm.controls['place'].value,
-                                      this.validateForm.controls['type'].value,
-                                    this.pathdoc,
-                                  this.pathpic).subscribe(
-                                      data =>{
-                                          if(data['errno'] === 0)
-                                          {
-                                            console.log("bingo！!!");
-                                            this.submitted = true;
-                                            this.nzMessageService.success('这是一条成功的提示,并将于10秒后消失', {nzDuration: 10000});
-                                            this.router.navigate(['home']);
-                                          }
-                                      },
-                                      err =>{
-
-                                      }
-                                      );
-                                    }
+        if(this.handleUpload())
+        {
+          if(this.handleUpload1())
+          {
+            this.enterService.addinfopicture(this.validateForm.controls['name'].value,
+            this.validateForm.controls['dynasty'].value,
+           this.validateForm.controls['place'].value,
+           this.validateForm.controls['type'].value,
+         this.pathdoc,
+       this.pathpic).subscribe(
+           data =>{
+               if(data['errno'] === 0)
+               {
+                 console.log("bingo！!!");
+                 this.submitted = true;
+                 this.nzMessageService.success('这是一条成功的提示,并将于10秒后消失', {nzDuration: 10000});
+                 this.router.navigate(['home']);
+               }
+           },
+           err =>{
+  
+           }
+           );
+          }
+          else
+          {
+            console.log("else1111111111111")
+            this.pathdoc = this.pathpic;
+            this.enterService.addinfopicture(this.validateForm.controls['name'].value,
+            this.validateForm.controls['dynasty'].value,
+           this.validateForm.controls['place'].value,
+           this.validateForm.controls['type'].value,
+         this.pathdoc,
+       this.pathpic).subscribe(
+           data =>{
+               if(data['errno'] === 0)
+               {
+                 console.log("bingo！!!");
+                 this.submitted = true;
+                 this.nzMessageService.success('这是一条成功的提示,并将于10秒后消失', {nzDuration: 10000});
+                 this.router.navigate(['home']);
+               }
+           },
+           err =>{
+  
+           }
+           );
+          }
+          
+       }
+       else
+       {
+          this.nzMessageService.error('请上传预览图！'); 
+       }
+        }    
+      
     }
   
 
@@ -116,86 +149,50 @@ confirmForm (){
     beforeUpload = (file: UploadFile): boolean => {
       console.log(file);
       console.log(this.fileList)
+      this.namepic = file.name;
       this.pathpic = "img/"+file.name;
       //this.fileList.push(file);
       this.f = file;
       return true;
     }
-    /*
-    beforeUpload = (file: File) => {
-      //console.log(file.name)
-      const isPNG = file.type === 'image/png';
-      if (!isPNG) {
-        this.nzMessageService.error('You can only upload PNG file!');
-      }
-      const isLt10M = file.size / 1024 / 1024 < 1;
-      if (!isLt10M) {
-        this.nzMessageService.error('Image must smaller than 10MB!');
-      }
 
-      return isPNG && isLt10M;
-    }
-    */
-    /*
-    handleChange(info: { file: UploadFile }): void {
-      //console.log(info.file.name)
-      console.log(info.file)
-      if(info.file.status === 'uploading'){
-        console.log("unloading");
-      }
-      if(info.file.status === 'done'){
-        this.picname = info.file.name;
-        this.smallpic = info.file.thumbUrl;
-        console.log(this.picname)
-        //console.log(info.file.thumbUrl)
-      }
-      
-    }
-    */
     handleUpload() {
-      this.fileList.push(this.f);
-      const formData = new FormData();
-      
-      this.fileList.forEach((file: any) => {
-        console.log(file);
-        formData.append('file', file);
+      console.log(this.namepic)
+      if(this.namepic == null)
+      {
+        this.nzMessageService.error('图片上传为空')
+        return false;
+      }
+      else
+      {
+        this.fileList.push(this.f);
+        const formData = new FormData();
         
-      });
+        this.fileList.forEach((file: any) => {
+          console.log(file);
+          formData.append('file', file);
+          
+        });
+        
+        //formData.append('file',this.f);
+        console.log(this.f)
+        this.uploading = true;
+   
+        const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploadpic', formData, {
+           reportProgress: true
+        });
+        console.log(req)
+        this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
+          console.log(event['body']['errno'])
+          this.uploading = false;
+          this.nzMessageService.success('upload successfully.');
+        }, (err) => {
+          this.uploading = false;
+          this.nzMessageService.error('upload failed.');
+        });
+        return true;
+      }
       
-      //formData.append('file',this.f);
-      console.log(this.f)
-      this.uploading = true;
-      // You can use any AJAX library you like
-      /*
-      this.uploadpicService.uploadpic(formData).subscribe(
-        data =>{
-            if(data['errno'] === 0)
-            {
-              console.log("bingo！!!");
-              this.submitted = true;
-              this.nzMessageService.success('这是一条成功的提示,并将于10秒后消失', {nzDuration: 10000});
-              //this.router.navigate(['home']);
-            }
-        },
-        err =>{
-
-        }
-        );
-      }*/
-
-      
-      const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploadpic', formData, {
-         reportProgress: true
-      });
-      console.log(req)
-      this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
-        console.log(event['body']['errno'])
-        this.uploading = false;
-        this.nzMessageService.success('upload successfully.');
-      }, (err) => {
-        this.uploading = false;
-        this.nzMessageService.error('upload failed.');
-      });
     }
     beforeUpload1 = (file: UploadFile): boolean => {
       //this.f = file;
@@ -205,6 +202,7 @@ confirmForm (){
     }
     else
     {
+      this.namedoc = file.name;
       this.pathdoc = "doc/"+file.name;
       this.fileList1.push(file);
     }
@@ -212,25 +210,34 @@ confirmForm (){
     }
     handleUpload1() { //文件
       //this.fileList.push(this.f);
-      const formData = new FormData();
-      this.fileList1.forEach((file: any) => {
-        formData.append('file', file);
-      });
-      this.uploading = true;
-      // You can use any AJAX library you like
-      const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploaddoc', formData, {
-        // reportProgress: true
-      });
-      this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
-        console.log(event['body']['data']['path'])
-        this.pathpic = event['body']['data']['path'];
-        this.uploading = false;
-        this.nzMessageService.success('upload successfully.');
-      }, (err) => {
-        this.uploading = false;
-        this.nzMessageService.error('upload failed.');
-      });
-    } 
+      if(this.namedoc == null)
+      {
+        this.nzMessageService.error('文件上传为空')
+        return false;
+      }
+      else
+      {
+        const formData = new FormData();
+        this.fileList1.forEach((file: any) => {
+          formData.append('file', file);
+        });
+        this.uploading = true;
+        // You can use any AJAX library you like
+        const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploaddoc', formData, {
+          // reportProgress: true
+        });
+        this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
+          this.uploading = false;
+          this.nzMessageService.success('upload successfully.');
+        }, (err) => {
+          this.uploading = false;
+          this.nzMessageService.error('upload failed.');
+        });
+        return true;
+      } 
+      
+      }
+      
   
 
 }

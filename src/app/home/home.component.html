@@ -28,22 +28,9 @@
   <nz-layout>
     <nz-header style="background: #108ee9; padding:0;">
       <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
-      <nz-select 
-      style="width: 200px;padding:0 1%;margin:0"
-      nzAllowClear
-      [nzPlaceHolder]="'input search text'"
-      [nzFilter]="false"
-      [(ngModel)]="selectedOption"
-      (nzSearchChange)="searchChange($event)"
-      [nzNotFoundContent]="'无法找到'"
-      nzShowSearch>
-      <nz-option
-        *ngFor="let option of searchOptions"
-        [nzLabel]="option[0]"
-        [nzValue]="option[0]"
-        >
-      </nz-option>
-    </nz-select>
+
+      <nz-input [nzType]="'search'" [nzPlaceHolder]="'input search text'" [(ngModel)]="_value" style="width: 200px;" (nzOnSearch)="onSearch($event)"></nz-input>
+      
       <nz-dropdown  [nzPlacement]="'bottomRight'"  style="float:right">
         <div nz-dropdown>
           <div class="myMenuTrigger" style="height:40px;margin: 12px;border-radius: 3px;display:flex;/*Flex布局*/display: -webkit-flex; /* Safari */align-items:center;/*指定垂直居中*/">

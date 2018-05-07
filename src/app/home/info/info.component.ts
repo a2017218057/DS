@@ -48,7 +48,10 @@ export class InfoComponent implements OnInit {
       this.refreshData();
     }
   }
-
+  onSearch(event: string): void {
+    console.log(event);
+  
+  }
   /**
    * 刷新表格数据
    * @param reset

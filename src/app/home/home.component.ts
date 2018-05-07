@@ -5,6 +5,7 @@ import {NzMessageService} from "ng-zorro-antd";
 import { Jsonp, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { EnterService } from '../service/enter.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,18 +18,30 @@ export class HomeComponent implements OnInit {
   isCollapsed = false;
   triggerTemplate = null;
   
+  _value = '';
   
     constructor(private router: Router,
                 private checkUserService: CheckUserService,
                 private nzMessageService: NzMessageService,
-                ){}
+                private enterService: EnterService){}
 
   ngOnInit() {
     
   }
-  searchChange(searchText) {
-    const query = encodeURI(searchText);
-    console.log(query)
+  onSearch(event: string): void {
+    console.log(event);
+    this.enterService.searchinfo(event).subscribe(
+   data =>{
+       if(data['errno'] === 0)
+       {
+         this.nzMessageService.success('查询成功', {nzDuration: 10000});
+         this.router.navigate(['home']);
+       }
+   },
+   err =>{
+
+   }
+   );
   }
   /*logout(){
     if (this.checkUserService.isLogin) {
