@@ -80,6 +80,12 @@ export class EnterService implements OnInit{
     set("username", username)
     .set("page", pageIndex.toString())
     .set("pageSize", pageSize.toString());
-    return this.http.post('http://localhost:8080/leave/searchinfo/searchlist', searchinfo, httpOptions)
+    return this.http.post('http://localhost:8080/leave/searchinfo/searchlist', searchinfo, httpOptions);
+  }
+  public DownloadPic(pathpic){
+    
+    const downloadinfo = new HttpParams().set('pathpic',pathpic);
+    return this.http.post('http://localhost:8080/leave/download/pic', downloadinfo, httpOptions)
+
   }
 }

@@ -15,6 +15,11 @@
             <nz-input [nzDisabled]="true"  formControlName="pathpicUpdate"  [(ngModel)]="_pathpic" [nzSize]="'large'" name="successValid">
             </nz-input>     
           </div>
+          
+          <button nz-button [nzType]="'primary'" [nzSize]="large" [nzShape]=""style="margin-left: 5%" (click)="DownloadFile()">
+            <i class="anticon anticon-download">DownloadFile</i>
+          </button>
+        
         </div>
   <div nz-form-item nz-row>
     <div nz-form-label nz-col [nzSpan]="5">
