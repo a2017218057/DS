@@ -4,22 +4,16 @@
       <a [routerLink]="['info']"><img src="../assets/zorro.svg" style="width: 32px"></a>
     </div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu>
+      <li nz-submenu [nzOpen]="true">
         <span title><i class="anticon anticon-edit"></i><span class="nav-text">添加数据</span></span>
         <ul>
           <li nz-menu-item ><a [routerLink]="['addinfo']">填写信息</a></li>
         </ul>
       </li>
-      <li nz-submenu>
-        <span title><i class="anticon anticon-plus-circle-o"></i><span class="nav-text">查询信息</span></span>
-        <ul>
-          <li nz-menu-item><a [routerLink]="['overtime']">填写内容</a></li>
-        </ul>
-      </li>
-      <li nz-submenu>
+      <li nz-submenu [nzOpen]="true">
         <span title><i class="anticon anticon-inbox"></i><span class="nav-text">个人上传</span></span>
         <ul>
-          <li nz-menu-item><a [routerLink]="['info']">上传列表</a></li>
+          <li nz-menu-item><a [routerLink]="['info']"[queryParams]="{self:'self'}">上传列表</a></li>
         </ul>
       </li>
       <!--<li nz-menu-item><span><i class="anticon anticon-file"></i><span class="nav-text">加班申请</span></span></li>-->
@@ -39,7 +33,7 @@
           </div>
         </div>
         <ul nz-menu>
-          <li nz-menu-item (click)="log('1st menu item')"><a [routerLink]="['info']"><i class="anticon anticon-user" style="margin-right: 5px"></i>个人信息</a></li>
+          <!--<li nz-menu-item (click)="log('1st menu item')"><a [routerLink]="['info']"><i class="anticon anticon-user" style="margin-right: 5px"></i>个人信息</a></li>-->
           <li nz-menu-item (click)="logout()"><i class="anticon anticon-logout" style="margin-right: 5px"></i>注销</li>
         </ul>
       </nz-dropdown>

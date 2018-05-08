@@ -34,7 +34,7 @@ export class InfoComponent implements OnInit {
   update_data;
   i;
   j;
-
+  cc;
   constructor(private checkUserService:CheckUserService,
               private enterService:EnterService,
               private confirmServ: NzModalService,
@@ -43,9 +43,12 @@ export class InfoComponent implements OnInit {
 
                 this.activatedRoute.queryParams.subscribe(params => {
                   this.param = params['e'];
+                  this.cc = params['self'];
                   console.log(this.param)
+                  console.log(this.cc)
                   this.refreshData();
                 });
+
               }
 
   ngOnInit() {
@@ -79,14 +82,29 @@ export class InfoComponent implements OnInit {
       }
       else if(this.param == null)
       {
-        this.enterService.getLoadDoneList(this.current_user, this._current, this._pageSize).subscribe((data: any) => {
-          console.log("刷新表格数据");
-          
-          this._loading = false;
-          this._total = data.data.total;
-          this._dataSet = data.data.list;
-          //console.log(this._dataSet)
-        });
+        if(this.cc == 'self')
+        {
+          this.enterService.getLoadSelfList(this.current_user, this._current, this._pageSize).subscribe((data: any) => {
+            console.log("刷新表格数据");
+            
+            this._loading = false;
+            this._total = data.data.total;
+            this._dataSet = data.data.list;
+            //console.log(this._dataSet)
+          });
+        }
+        else
+        {
+          this.enterService.getLoadDoneList(this.current_user, this._current, this._pageSize).subscribe((data: any) => {
+            console.log("刷新表格数据");
+            
+            this._loading = false;
+            this._total = data.data.total;
+            this._dataSet = data.data.list;
+            //console.log(this._dataSet)
+          });
+        }
+        
       }
       
       

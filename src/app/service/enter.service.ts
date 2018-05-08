@@ -33,6 +33,14 @@ export class EnterService implements OnInit{
       .set("pageSize", pageSize.toString());
     return this.http.post("http://localhost:8080/leave/load/doneList", getLoadDoneListInfo, httpOptions);
   }
+  public getLoadSelfList(username, pageIndex = 1, pageSize = 10){
+    console.log("开始post"+username);
+    const getLoadDoneListInfo = new HttpParams()
+      .set("username", username)
+      .set("page", pageIndex.toString())
+      .set("pageSize", pageSize.toString());
+    return this.http.post("http://localhost:8080/leave/load/selfList", getLoadDoneListInfo, httpOptions);
+  }
   public addinfopicture(name, dynasty, place, type, pathdoc, pathpic, ifcheck){
     console.log(name);
     const pictureinfo = new HttpParams().
