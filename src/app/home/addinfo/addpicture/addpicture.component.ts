@@ -39,6 +39,7 @@ export class AddpictureComponent implements OnInit {
         dynasty          : [ '', [ Validators.required ]],
         place            : [ '', [ Validators.required]],
         type            : [ '', [ Validators.required ] ],
+        ifcheck         :[true]
       });
       
 }
@@ -70,12 +71,14 @@ confirmForm (){
         {
           if(this.handleUpload1())
           {
+            console.log(this.validateForm.controls['ifcheck'].value);
             this.enterService.addinfopicture(this.validateForm.controls['name'].value,
             this.validateForm.controls['dynasty'].value,
            this.validateForm.controls['place'].value,
            this.validateForm.controls['type'].value,
          this.pathdoc,
-       this.pathpic).subscribe(
+       this.pathpic,
+      this.validateForm.controls['ifcheck'].value).subscribe(
            data =>{
                if(data['errno'] === 0)
                {
@@ -99,7 +102,8 @@ confirmForm (){
            this.validateForm.controls['place'].value,
            this.validateForm.controls['type'].value,
          this.pathdoc,
-       this.pathpic).subscribe(
+       this.pathpic,
+       this.validateForm.controls['ifcheck'].value).subscribe(
            data =>{
                if(data['errno'] === 0)
                {
@@ -228,7 +232,7 @@ confirmForm (){
         });
         this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
           this.uploading = false;
-          this.nzMessageService.success('upload successfully.');
+          //this.nzMessageService.success('upload successfully.');
         }, (err) => {
           this.uploading = false;
           this.nzMessageService.error('upload failed.');

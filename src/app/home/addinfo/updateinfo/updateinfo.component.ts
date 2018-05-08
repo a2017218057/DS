@@ -11,6 +11,7 @@ export class UpdateinfoComponent implements OnInit {
   validateFormUpdate: FormGroup;
   @Input() currentData;
   constructor(private fb: FormBuilder, private enterService: EnterService) {
+    
     this.validateFormUpdate = this.fb.group({
       nameUpdate          : [ '', [ Validators.required ]],
       dynastyUpdate           : [ '' , [ Validators.required ]],
@@ -19,7 +20,8 @@ export class UpdateinfoComponent implements OnInit {
       loadtimeUpdate           : [ '', [ Validators.required ]],
       pathpicUpdate           : [ '', [ Validators.required ]],
       idUpdate           : [ '', [ Validators.required ]],
-      uidUpdate          : [ '', [ Validators.required ]]
+      uidUpdate          : [ '', [ Validators.required ]],
+      ifcheckUpdate          : [''],
     });
    }
 
@@ -35,10 +37,13 @@ export class UpdateinfoComponent implements OnInit {
   _pathpic = null;
   _id = null;
   _uid = null;//自增字段
+  _ifcheck = null;
   ngOnChanges(changes: SimpleChanges): void {
     if (this.currentData) {
       // console.log("-----" + JSON.stringify(this.currentData));
       // console.log(this.currentData.startTime);
+      console.log(this.currentData)
+      //this.c = this.currentData.ifcheck;
       this._name = this.currentData.name;
       this._dynasty = this.currentData.dynasty;
       this._place = this.currentData.place;
@@ -47,10 +52,13 @@ export class UpdateinfoComponent implements OnInit {
       this._pathpic = "http://localhost:8080/"+this.currentData.pathpic;
       this._id = this.currentData.id;
       this._uid = this.currentData.uid;
+
+      this._ifcheck = this.currentData.ifcheck;
       this.getFormControl("nameUpdate").markAsDirty();
       this.getFormControl("dynastyUpdate").markAsDirty();
       this.getFormControl("placeUpdate").markAsDirty();
-      this.getFormControl("typeUpdate").markAsDirty();     
+      this.getFormControl("typeUpdate").markAsDirty();    
+      this.getFormControl("ifcheckUpdate").markAsDirty(); 
     }
   }
   getFormControl(name) {
@@ -80,7 +88,8 @@ export class UpdateinfoComponent implements OnInit {
           dynasty : this.validateFormUpdate.controls[ "dynastyUpdate" ].value,
           place : this.validateFormUpdate.controls[ "placeUpdate" ].value,
           type : this.validateFormUpdate.controls[ "typeUpdate" ].value,
-          uid : this.currentData.uid
+          uid : this.currentData.uid,
+          ifcheck : this.validateFormUpdate.controls['ifcheckUpdate'].value
         };
     
         // this.leaveService.firstCall();
@@ -100,10 +109,12 @@ export class UpdateinfoComponent implements OnInit {
       this._pathpic = "http://localhost:8080/"+this.currentData.pathpic;
       this._id = this.currentData.id;
       this._uid = this.currentData.uid;
+      this._ifcheck = this.currentData.ifcheck;
       this.getFormControl("nameUpdate").markAsDirty();
       this.getFormControl("dynastyUpdate").markAsDirty();
       this.getFormControl("placeUpdate").markAsDirty();
       this.getFormControl("typeUpdate").markAsDirty();  
+      this.getFormControl("ifcheckUpdate").markAsDirty();
     }
   }
 }

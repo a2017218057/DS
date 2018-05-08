@@ -31,7 +31,6 @@
           <i class="anticon anticon-plus"></i>
           <div class="ant-upload-text" >Upload</div>
       </nz-upload>
-      <button nz-button [nzType]="'primary'" [nzLoading]="uploading" (click)="handleUpload()" style="margin-top: 16px"></button>
       <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
         <ng-template #modalContent>
           <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
@@ -84,9 +83,20 @@
       
     </div>
   </div>
+  <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzSpan]="5">
+        <label>是否可见</label>
+      </div>
+      <div nz-col [nzSpan]="12" nz-form-control>
+  <nz-switch formControlName="ifcheck">
+      <i class=" anticon anticon-check" checked></i>
+      <i class=" anticon anticon-cross" unchecked></i>
+    </nz-switch>
+  </div>
+</div>
   <div nz-form-item nz-row style="margin-bottom:8px;">
     <div nz-form-control nz-col [nzSpan]="14" [nzOffset]="6">
-      <button nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="_submitForm()">Register</button>
+      <button nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="_submitForm()">提交</button>
     </div>
   </div>
 </form>

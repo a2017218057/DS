@@ -21,6 +21,10 @@ export class EnterService implements OnInit{
     const loginInfo = new HttpParams().set("username", username).set("password", password);
     return this.http.post('http://localhost:8080/leave/auth/login', loginInfo, httpOptions);
   }
+  public logout(){
+    const logoutInfo = new HttpParams();
+    return this.http.post('http://localhost:8080/leave/auth/logout',logoutInfo,httpOptions);
+  }
   public getLoadDoneList(username, pageIndex = 1, pageSize = 10){
     console.log("开始post"+username);
     const getLoadDoneListInfo = new HttpParams()
@@ -29,7 +33,7 @@ export class EnterService implements OnInit{
       .set("pageSize", pageSize.toString());
     return this.http.post("http://localhost:8080/leave/load/doneList", getLoadDoneListInfo, httpOptions);
   }
-  public addinfopicture(name, dynasty, place, type, pathdoc, pathpic){
+  public addinfopicture(name, dynasty, place, type, pathdoc, pathpic, ifcheck){
     console.log(name);
     const pictureinfo = new HttpParams().
     set("name", name).
@@ -37,7 +41,8 @@ export class EnterService implements OnInit{
     set("place", place).
     set("type", type).
     set("pathdoc", pathdoc).
-    set("pathpic",pathpic);
+    set("pathpic",pathpic).
+    set("ifcheck",ifcheck);
     return this.http.post('http://localhost:8080/leave/add/addpic', pictureinfo, httpOptions);
   }
   public getLoadDropList(username, pageIndex = 1, pageSize = 10){
@@ -62,8 +67,11 @@ export class EnterService implements OnInit{
     return this.http.post("http://localhost:8080/leave/apply/modify", updateInfo, httpOptions);
 
   }
-  public searchinfo(event){
-    const searchinfo = new HttpParams().set('event',event);
+  public searchinfo(event,username,pageIndex,pageSize){
+    const searchinfo = new HttpParams().set('event',event).
+    set("username", username)
+    .set("page", pageIndex.toString())
+    .set("pageSize", pageSize.toString());
     return this.http.post('http://localhost:8080/leave/searchinfo/searchlist', searchinfo, httpOptions)
   }
 }

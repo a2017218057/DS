@@ -1,18 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component,Input, OnInit, ViewChild } from '@angular/core';
 import { CheckUserService } from '../../service/check-user.service';
 import { EnterService } from '../../service/enter.service';
 import {NzModalService} from "ng-zorro-antd";
 import {NzMessageService} from 'ng-zorro-antd';
 import { UpdateinfoComponent } from '../addinfo/updateinfo/updateinfo.component';
 import { CheckinfoComponent } from '../addinfo/checkinfo/checkinfo.component';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent implements OnInit {
-
+  @Input() par;
+  param:any = null;
    // 表格变量
    _current = 1;
    _pageSize = 10;
@@ -38,19 +39,21 @@ export class InfoComponent implements OnInit {
               private enterService:EnterService,
               private confirmServ: NzModalService,
               private  nzMessageService: NzMessageService,
-              ) { 
-               
+              public activatedRoute:ActivatedRoute) { 
+
+                this.activatedRoute.queryParams.subscribe(params => {
+                  this.param = params['e'];
+                  console.log(this.param)
+                  this.refreshData();
+                });
               }
 
   ngOnInit() {
+    
     if (this.checkUserService.isLogin) {
       this.current_user = this.checkUserService.current_user;
       this.refreshData();
     }
-  }
-  onSearch(event: string): void {
-    console.log(event);
-  
   }
   /**
    * 刷新表格数据
@@ -58,19 +61,34 @@ export class InfoComponent implements OnInit {
    */
   refreshData(reset = false) {
     if (this.checkUserService.isLogin) {
-
+      console.log("xxxxxxxxxxxxx")
       if (reset) {
         this._current = 1;
       }
       this._loading = true;
-
-      this.enterService.getLoadDoneList(this.current_user, this._current, this._pageSize).subscribe((data: any) => {
-        console.log("刷新表格数据");
-        
-        this._loading = false;
-        this._total = data.data.total;
-        this._dataSet = data.data.list;
-      });
+      if(this.param!=null)
+      {
+        this.enterService.searchinfo(this.param,this.current_user, this._current, this._pageSize).subscribe((data: any)=>{
+          console.log("搜索并刷新表格数据");
+          
+          this._loading = false;
+          this._total = data.data.total;
+          this._dataSet = data.data.list;
+          
+        });
+      }
+      else if(this.param == null)
+      {
+        this.enterService.getLoadDoneList(this.current_user, this._current, this._pageSize).subscribe((data: any) => {
+          console.log("刷新表格数据");
+          
+          this._loading = false;
+          this._total = data.data.total;
+          this._dataSet = data.data.list;
+          //console.log(this._dataSet)
+        });
+      }
+      
       
     }
   }

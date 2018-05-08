@@ -80,5 +80,16 @@
               </nz-input>
             </div>
           </div>
+          <div nz-form-item nz-row>
+              <div nz-form-label nz-col [nzSpan]="5">
+                <label>是否可见</label>
+              </div>
+              <div nz-col [nzSpan]="12" nz-form-control>
+          <nz-switch formControlName="ifcheckUpdate" [(ngModel)]="_ifcheck">
+              <i class=" anticon anticon-check" checked></i>
+              <i class=" anticon anticon-cross" unchecked></i>
+            </nz-switch>
+          </div>
+        </div>
   
 </form>

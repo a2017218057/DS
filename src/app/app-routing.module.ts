@@ -18,7 +18,8 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     children : [
       {path: '', redirectTo: 'info', pathMatch: 'full'},
-      {path: 'info', component: InfoComponent},      
+      {path: 'info', component: InfoComponent}, 
+      //{path: 'info/:id', component: InfoComponent},      
       {path: 'addinfo', component: AddinfoComponent},    
     ]
   },
