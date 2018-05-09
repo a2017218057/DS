@@ -42,6 +42,10 @@ export class CheckinfoComponent implements OnInit {
       this._id = this.currentData.id;
       this._uid = this.currentData.uid;
   }
+  test(){
+    console.log(this._pathpic)
+    window.open('http://localhost:8080/leave/download/pic?pathpic='+this.currentData.pathpic,'下载文件')
+  }
   DownloadFile()
   {
     console.log("download")
