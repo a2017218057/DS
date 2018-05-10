@@ -87,6 +87,13 @@ export class EnterService implements OnInit{
     .set("pageSize", pageSize.toString());
     return this.http.post('http://localhost:8080/leave/searchinfo/searchlist', searchinfo, httpOptions);
   }
+  public searchtags(tag_seq,username,pageIndex,pageSize){
+    const searchtags = new HttpParams().set('tag_seq',tag_seq).
+    set("username", username)
+    .set("page", pageIndex.toString())
+    .set("pageSize", pageSize.toString());
+    return this.http.post('http://localhost:8080/leave/searchinfo/searchtags', searchtags, httpOptions);
+  }
   public DownloadPic(pathpic){
     
     const downloadinfo = new HttpParams().set('pathpic',pathpic);

@@ -248,23 +248,18 @@ confirmForm (){
         
         
       ];
-      //selectedMultipleOption = [ this.searchOptions[ 0 ] ];
-  
-      tagg(){
-        //console.log(this.selectedMultipleOption)
-        console.log(this.validateForm.controls['select_multiple'].value[0].label)
-      }
       change(tag_get: any){
         
+        this.tag_seq = ''
         if(tag_get)
         {
-        console.log(tag_get.length)
-        for(var i = 0;i < tag_get.length;i++){
-          console.log(tag_get[i])
-          this.tag_seq += tag_get[i]+';';
-          console.log(this.tag_seq)
-        }
         
+        for(var i = 0;i < tag_get.length;i++){
+          
+          this.tag_seq += tag_get[i]+';';
+          
+        }
+        console.log(this.tag_seq)
         
       }
       }

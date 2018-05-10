@@ -26,7 +26,7 @@
       <nz-input [nzType]="'search'" [nzPlaceHolder]="'input search text'" [(ngModel)]="_value" style="width: 200px;" (nzOnSearch)="onSearch($event)"></nz-input>
       
           
-        <nz-select nzTags style="width: 400px"  [nzSize]="'large'" [nzMode]="'multiple'" [(ngModel)]="selectedMultipleOption" [nzPlaceHolder]="'请输入标签'">
+        <nz-select nzTags style="width: 400px"  [nzSize]="'default'" [nzMode]="'multiple'"[(ngModel)]="selectedMultipleOption" [nzPlaceHolder]="'请输入标签'">
           <nz-option
               *ngFor="let option of searchOptions"
               [nzLabel]="option.label"
@@ -36,7 +36,9 @@
       
       
       
-          <button nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="tagg()">提交</button>
+        <button nz-button [nzType]="'default'" [nzShape]="'circle'" (click)="searchTags(selectedMultipleOption)">
+            <i class="anticon anticon-search"></i>
+          </button>
         
       
   

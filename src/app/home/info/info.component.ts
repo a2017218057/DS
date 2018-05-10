@@ -35,6 +35,7 @@ export class InfoComponent implements OnInit {
   i;
   j;
   cc;
+  tt;
   constructor(private checkUserService:CheckUserService,
               private enterService:EnterService,
               private confirmServ: NzModalService,
@@ -44,8 +45,10 @@ export class InfoComponent implements OnInit {
                 this.activatedRoute.queryParams.subscribe(params => {
                   this.param = params['e'];
                   this.cc = params['self'];
+                  this.tt = params['tags']
                   console.log(this.param)
                   console.log(this.cc)
+                  console.log(this.tt)
                   this.refreshData();
                 });
 
@@ -80,7 +83,18 @@ export class InfoComponent implements OnInit {
           
         });
       }
-      else if(this.param == null)
+      else if(this.tt!=null)
+      {
+        this.enterService.searchtags(this.tt,this.current_user, this._current, this._pageSize).subscribe((data: any)=>{
+          console.log("搜索b标签并刷新表格数据");
+          
+          this._loading = false;
+          this._total = data.data.total;
+          this._dataSet = data.data.list;
+          
+        });
+      }
+      else if(this.param == null && this.tt == null)
       {
         if(this.cc == 'self')
         {

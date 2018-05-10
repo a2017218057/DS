@@ -14,7 +14,8 @@ import { InfoComponent } from './info/info.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  selectedMultipleOption = null;
+  tag_seq: String = '';
   p;
   isCollapsed = false;
   triggerTemplate = null;
@@ -69,5 +70,27 @@ export class HomeComponent implements OnInit {
   log(msg: string){
     console.log(msg);
   }
+  searchOptions = [
+        
+        
+  ];
 
+  searchTags(tag_get:any){
+    //console.log(tag_get[0])
+    this.tag_seq = '';
+    if(tag_get==' '||tag_get==null){
+      this.nzMessageService.create("error","标签搜索不能为空或空格！")
+    }
+    else{
+
+      for(var i = 0 ; i < tag_get.length; i++){
+        this.tag_seq += tag_get[i] + ';';
+      }
+      console.log(this.tag_seq)
+    }
+    let navigationExtras: NavigationExtras = {
+      queryParams: { 'tags': this.tag_seq},
+    };
+this.router.navigate(['home/info/'],navigationExtras);
+  }
 }

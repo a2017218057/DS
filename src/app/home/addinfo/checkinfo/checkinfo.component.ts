@@ -44,7 +44,7 @@ export class CheckinfoComponent implements OnInit {
   }
   test(){
     console.log(this._pathpic)
-    window.open('http://localhost:8080/leave/download/pic?pathpic='+this.currentData.pathpic,'下载文件')
+    window.open('http://localhost:8080/leave/download/doc?pathdoc='+this.currentData.pathdoc,'下载文件')
   }
   DownloadFile()
   {
