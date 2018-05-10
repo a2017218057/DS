@@ -17,6 +17,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./addpicture.component.css']
 })
 export class AddpictureComponent implements OnInit {
+  tag_seq:String = '';
   fileList: UploadFile[] = [];
   fileList1: UploadFile[] = [];
   pathdoc:any;
@@ -39,6 +40,7 @@ export class AddpictureComponent implements OnInit {
         dynasty          : [ '', [ Validators.required ]],
         place            : [ '', [ Validators.required]],
         type            : [ '', [ Validators.required ] ],
+        select_multiple :['', [ this.tagsnumber ]],
         ifcheck         :[true]
       });
       
@@ -78,7 +80,8 @@ confirmForm (){
            this.validateForm.controls['type'].value,
          this.pathdoc,
        this.pathpic,
-      this.validateForm.controls['ifcheck'].value).subscribe(
+      this.validateForm.controls['ifcheck'].value,
+    this.tag_seq).subscribe(
            data =>{
                if(data['errno'] === 0)
                {
@@ -103,7 +106,7 @@ confirmForm (){
            this.validateForm.controls['type'].value,
          this.pathdoc,
        this.pathpic,
-       this.validateForm.controls['ifcheck'].value).subscribe(
+       this.validateForm.controls['ifcheck'].value,this.tag_seq).subscribe(
            data =>{
                if(data['errno'] === 0)
                {
@@ -241,7 +244,35 @@ confirmForm (){
       } 
       
       }
-      
+      searchOptions = [
+        
+        
+      ];
+      //selectedMultipleOption = [ this.searchOptions[ 0 ] ];
   
-
+      tagg(){
+        //console.log(this.selectedMultipleOption)
+        console.log(this.validateForm.controls['select_multiple'].value[0].label)
+      }
+      change(tag_get: any){
+        
+        if(tag_get)
+        {
+        console.log(tag_get.length)
+        for(var i = 0;i < tag_get.length;i++){
+          console.log(tag_get[i])
+          this.tag_seq += tag_get[i]+';';
+          console.log(this.tag_seq)
+        }
+        
+        
+      }
+      }
+      tagsnumber = (control: FormControl): { [s: string]: boolean } => {
+        if (!control.value||control.value == ' ') {
+          return { required: true };
+        } else if (control.value.length > 8) {
+          return { tagsnumber: true, error: true };
+        }
+      };
 }

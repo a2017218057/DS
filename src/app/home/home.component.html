@@ -24,7 +24,23 @@
       <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
 
       <nz-input [nzType]="'search'" [nzPlaceHolder]="'input search text'" [(ngModel)]="_value" style="width: 200px;" (nzOnSearch)="onSearch($event)"></nz-input>
-      <nz-input nzTags  style="width: 200px;" ></nz-input>
+      
+          
+        <nz-select nzTags style="width: 400px"  [nzSize]="'large'" [nzMode]="'multiple'" [(ngModel)]="selectedMultipleOption" [nzPlaceHolder]="'请输入标签'">
+          <nz-option
+              *ngFor="let option of searchOptions"
+              [nzLabel]="option.label"
+              [nzValue]="option">
+            </nz-option>
+        </nz-select>
+      
+      
+      
+          <button nz-button [nzSize]="'large'" [nzType]="'primary'" (click)="tagg()">提交</button>
+        
+      
+  
+      
       <nz-dropdown  [nzPlacement]="'bottomRight'"  style="float:right">
         <div nz-dropdown>
           <div class="myMenuTrigger" style="height:40px;margin: 12px;border-radius: 3px;display:flex;/*Flex布局*/display: -webkit-flex; /* Safari */align-items:center;/*指定垂直居中*/">

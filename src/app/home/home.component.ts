@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { EnterService } from '../service/enter.service';
 import { InfoComponent } from './info/info.component';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,8 +16,6 @@ import { InfoComponent } from './info/info.component';
 export class HomeComponent implements OnInit {
 
   p;
-  selectedOption;
-  searchOptions = [];
   isCollapsed = false;
   triggerTemplate = null;
   
@@ -26,8 +25,9 @@ export class HomeComponent implements OnInit {
                 private checkUserService: CheckUserService,
                 private nzMessageService: NzMessageService,
                 private enterService: EnterService,
-                private activatedRoute:ActivatedRoute){
-
+                private activatedRoute:ActivatedRoute,
+                ){
+                  
                   
                 }
 
@@ -69,4 +69,5 @@ export class HomeComponent implements OnInit {
   log(msg: string){
     console.log(msg);
   }
+
 }
