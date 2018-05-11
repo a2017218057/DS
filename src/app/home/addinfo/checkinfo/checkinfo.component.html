@@ -1,22 +1,22 @@
 <form nz-form [nzType]="'horizontal'" [formGroup]="validateFormUpdate">
     <div nz-form-item nz-row>
         <div nz-form-label nz-col [nzSpan]="5">
-          <label>图片</label>
+          <label>预览图</label>
         </div>
-        <div nz-form-control [nzValidateStatus]="'success'" nzHasFeedback nz-col [nzSpan]="12">
+        <div nz-form-control [nzValidateStatus]="'success'" nz-col [nzSpan]="12">
             <img style="width:334px;height:auto" align="middle" src="http://localhost:8080/{{currentData.pathpic}}"  />
         </div>
       </div>
       <div nz-form-item nz-row>
           <div nz-form-label nz-col [nzSpan]="5">
-            <label>图片路径</label>
+            <label>文件路径</label>
           </div>
           <div nz-form-control [nzValidateStatus]="'success'" nzHasFeedback nz-col [nzSpan]="12">
-            <nz-input [nzDisabled]="true"  formControlName="pathpicUpdate"  [(ngModel)]="_pathpic" [nzSize]="'large'" name="successValid">
+            <nz-input [nzDisabled]="true"  formControlName="pathdocUpdate"  [(ngModel)]="_pathdoc" [nzSize]="'large'" name="successValid">
             </nz-input>     
           </div>
           
-          <button nz-button [nzType]="'primary'" [nzSize]="large" [nzShape]=""style="margin-left: 5%" (click)="test()">
+          <button nz-button [nzType]="'primary'" [nzSize]="large" [nzShape]=""style="margin-left: 5%" (click)="test()" [disabled]="!currentData.ifcheckdown">
             <i class="anticon anticon-download">DownloadFile</i>
           </button>
         

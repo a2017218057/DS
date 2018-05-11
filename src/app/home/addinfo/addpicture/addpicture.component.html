@@ -1,7 +1,7 @@
 <form  [hidden]="submitted" nz-form [nzType]="'horizontal'" [formGroup]="validateForm">
     <div nz-form-item nz-row>
         <div nz-form-label nz-col [nzSpan]="5">
-          <label>文件</label>
+          <label>原文件</label>
         </div>
         <nz-upload
         nzAction="http://localhost:3000/profile/"
@@ -17,7 +17,7 @@
     
   <div nz-form-item nz-row>
         <div nz-form-label nz-col [nzSpan]="5">
-            <label>图片</label>
+            <label>预览图</label>
           </div>
         <nz-upload
         nzAction="http://localhost:3000/posts/"
@@ -110,6 +110,17 @@
       <i class=" anticon anticon-cross" unchecked></i>
     </nz-switch>
   </div>
+</div>
+<div nz-form-item nz-row>
+    <div nz-form-label nz-col [nzSpan]="5">
+      <label>可下载</label>
+    </div>
+    <div nz-col [nzSpan]="12" nz-form-control>
+<nz-switch formControlName="ifcheckdown">
+    <i class=" anticon anticon-check" checked></i>
+    <i class=" anticon anticon-cross" unchecked></i>
+  </nz-switch>
+</div>
 </div>
   <div nz-form-item nz-row style="margin-bottom:8px;margin-left: 50px">
     <div nz-form-control nz-col [nzSpan]="14" [nzOffset]="6">

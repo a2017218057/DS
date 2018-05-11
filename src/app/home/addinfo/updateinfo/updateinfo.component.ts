@@ -18,10 +18,11 @@ export class UpdateinfoComponent implements OnInit {
       placeUpdate             : [ '', [ Validators.required ]],
       typeUpdate         : [ '', [ Validators.required ]],
       loadtimeUpdate           : [ '', [ Validators.required ]],
-      pathpicUpdate           : [ '', [ Validators.required ]],
+      pathdocUpdate           : [ '', [ Validators.required ]],
       idUpdate           : [ '', [ Validators.required ]],
       uidUpdate          : [ '', [ Validators.required ]],
       ifcheckUpdate          : [''],
+      ifcheckdownUpdate     :['']
     });
    }
 
@@ -34,10 +35,11 @@ export class UpdateinfoComponent implements OnInit {
   _place = null;
   _type = null;
   _loadtime = null;
-  _pathpic = null;
+  _pathdoc = null;
   _id = null;
   _uid = null;//自增字段
   _ifcheck = null;
+  _ifcheckdown = null;
   ngOnChanges(changes: SimpleChanges): void {
     if (this.currentData) {
       // console.log("-----" + JSON.stringify(this.currentData));
@@ -49,16 +51,17 @@ export class UpdateinfoComponent implements OnInit {
       this._place = this.currentData.place;
       this._type = this.currentData.type;
       this._loadtime = this.currentData.loadtime;
-      this._pathpic = "http://localhost:8080/"+this.currentData.pathpic;
+      this._pathdoc = "http://localhost:8080/"+this.currentData.pathdoc;
       this._id = this.currentData.id;
       this._uid = this.currentData.uid;
-
       this._ifcheck = this.currentData.ifcheck;
+      this._ifcheckdown = this.currentData.ifcheckdown;
       this.getFormControl("nameUpdate").markAsDirty();
       this.getFormControl("dynastyUpdate").markAsDirty();
       this.getFormControl("placeUpdate").markAsDirty();
       this.getFormControl("typeUpdate").markAsDirty();    
       this.getFormControl("ifcheckUpdate").markAsDirty(); 
+      this.getFormControl("ifcheckdownUpdate").markAsDirty();
     }
   }
   getFormControl(name) {
@@ -89,7 +92,8 @@ export class UpdateinfoComponent implements OnInit {
           place : this.validateFormUpdate.controls[ "placeUpdate" ].value,
           type : this.validateFormUpdate.controls[ "typeUpdate" ].value,
           uid : this.currentData.uid,
-          ifcheck : this.validateFormUpdate.controls['ifcheckUpdate'].value
+          ifcheck : this.validateFormUpdate.controls['ifcheckUpdate'].value,
+          ifcheckdown : this.validateFormUpdate.controls['ifcheckdownUpdate'].value
         };
     
         // this.leaveService.firstCall();
@@ -106,15 +110,17 @@ export class UpdateinfoComponent implements OnInit {
       this._place = this.currentData.place;
       this._type = this.currentData.type;
       this._loadtime = this.currentData.loadtime;
-      this._pathpic = "http://localhost:8080/"+this.currentData.pathpic;
+      this._pathdoc = "http://localhost:8080/"+this.currentData.pathdoc;
       this._id = this.currentData.id;
       this._uid = this.currentData.uid;
       this._ifcheck = this.currentData.ifcheck;
+      this._ifcheckdown = this.currentData.ifcheckdown;
       this.getFormControl("nameUpdate").markAsDirty();
       this.getFormControl("dynastyUpdate").markAsDirty();
       this.getFormControl("placeUpdate").markAsDirty();
       this.getFormControl("typeUpdate").markAsDirty();  
       this.getFormControl("ifcheckUpdate").markAsDirty();
+      this.getFormControl("ifcheckdownUpdate").markAsDirty();
     }
   }
 }

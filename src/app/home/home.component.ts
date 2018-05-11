@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.p = this.activatedRoute.snapshot.params['id'];
-    console.log(this.p)
+    //console.log(this.p)
     
   }
   onSearch(event: string): void {
@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
       for(var i = 0 ; i < tag_get.length; i++){
         this.tag_seq += tag_get[i] + ';';
       }
-      console.log(this.tag_seq)
+      //console.log(this.tag_seq)
     }
     let navigationExtras: NavigationExtras = {
       queryParams: { 'tags': this.tag_seq},

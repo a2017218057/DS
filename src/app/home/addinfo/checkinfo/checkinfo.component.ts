@@ -16,7 +16,7 @@ export class CheckinfoComponent implements OnInit {
   _place = null;
   _type = null;
   _loadtime = null;
-  _pathpic = null;
+  _pathdoc = null;
   _id = null;
   _uid = null;//自增字段
   constructor(private fb: FormBuilder,private enterService: EnterService) {
@@ -26,7 +26,7 @@ export class CheckinfoComponent implements OnInit {
       placeUpdate             : [ '', [ Validators.required ]],
       typeUpdate         : [ '', [ Validators.required ]],
       loadtimeUpdate           : [ '', [ Validators.required ]],
-      pathpicUpdate           : [ '', [ Validators.required ]],
+      pathdocUpdate           : [ '', [ Validators.required ]],
       idUpdate           : [ '', [ Validators.required ]],
       uidUpdate          : [ '', [ Validators.required ]]
     });
@@ -38,25 +38,13 @@ export class CheckinfoComponent implements OnInit {
       this._place = this.currentData.place;
       this._type = this.currentData.type;
       this._loadtime = this.currentData.loadtime;
-      this._pathpic = "http://localhost:8080/"+this.currentData.pathpic;
+      this._pathdoc = "http://localhost:8080/"+this.currentData.pathdoc;
       this._id = this.currentData.id;
       this._uid = this.currentData.uid;
   }
   test(){
-    console.log(this._pathpic)
+    console.log(this._pathdoc)
     window.open('http://localhost:8080/leave/download/doc?pathdoc='+this.currentData.pathdoc,'下载文件')
   }
-  DownloadFile()
-  {
-    console.log("download")
-    this.enterService.DownloadPic(this.currentData.pathpic).subscribe(
-      data =>{
-          
-          console.log("返回")
-      },
-      err =>{
 
-      }
-      );
-  }
 }

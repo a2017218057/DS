@@ -46,9 +46,9 @@ export class InfoComponent implements OnInit {
                   this.param = params['e'];
                   this.cc = params['self'];
                   this.tt = params['tags']
-                  console.log(this.param)
-                  console.log(this.cc)
-                  console.log(this.tt)
+                  //console.log(this.param)
+                  //console.log(this.cc)
+                  //console.log(this.tt)
                   this.refreshData();
                 });
 
@@ -58,7 +58,7 @@ export class InfoComponent implements OnInit {
     
     if (this.checkUserService.isLogin) {
       this.current_user = this.checkUserService.current_user;
-      this.refreshData();
+      //this.refreshData();
     }
   }
   /**
@@ -67,7 +67,7 @@ export class InfoComponent implements OnInit {
    */
   refreshData(reset = false) {
     if (this.checkUserService.isLogin) {
-      console.log("xxxxxxxxxxxxx")
+      //console.log("xxxxxxxxxxxxx")
       if (reset) {
         this._current = 1;
       }
@@ -86,7 +86,7 @@ export class InfoComponent implements OnInit {
       else if(this.tt!=null)
       {
         this.enterService.searchtags(this.tt,this.current_user, this._current, this._pageSize).subscribe((data: any)=>{
-          console.log("搜索b标签并刷新表格数据");
+          console.log("搜索标签并刷新表格数据");
           
           this._loading = false;
           this._total = data.data.total;
@@ -99,7 +99,7 @@ export class InfoComponent implements OnInit {
         if(this.cc == 'self')
         {
           this.enterService.getLoadSelfList(this.current_user, this._current, this._pageSize).subscribe((data: any) => {
-            console.log("刷新表格数据");
+            console.log("刷新个人表格数据");
             
             this._loading = false;
             this._total = data.data.total;
@@ -130,13 +130,13 @@ export class InfoComponent implements OnInit {
    if(i == 'a')
    {
      this.j = i;
-     console.log("1111111111")
+     //console.log("1111111111")
      this.update_data = data;
    }
    if(i == 'b')
    {
      this.j = i;
-     console.log("222222222")
+     //console.log("222222222")
      this.model_data = data;
    }
     
@@ -148,13 +148,13 @@ export class InfoComponent implements OnInit {
     if(this.j == 'b')
     {
       this.isVisible = false;
-      console.log("进入b")
+      //console.log("进入b")
     }
     else if(this.j == 'a')
     {
 
     if (this.checkUserService.isLogin) {
-      console.log("进入a")
+      //console.log("进入a")
             if (!this.updateinfochild.confirmFormForParen()) {
               return;
             }
@@ -215,9 +215,9 @@ export class InfoComponent implements OnInit {
       showConfirmLoading: true,
       onOk() {
         if (constance.checkUserService.isLogin) {
-          console.log("okkkk");
+          //console.log("okkkk");
           return new Promise((resolve, reject) => {
-            console.log("aaaaaaaaa");
+            //console.log("aaaaaaaaa");
             constance.enterService.deletInfo(data['uid']).subscribe(
               data => {
                 if (data['errno'] === 0) {

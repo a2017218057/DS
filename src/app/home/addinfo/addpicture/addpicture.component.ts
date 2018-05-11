@@ -41,7 +41,8 @@ export class AddpictureComponent implements OnInit {
         place            : [ '', [ Validators.required]],
         type            : [ '', [ Validators.required ] ],
         select_multiple :['', [ this.tagsnumber ]],
-        ifcheck         :[true]
+        ifcheck         :[true],
+        ifcheckdown     :[true]
       });
       
 }
@@ -73,7 +74,7 @@ confirmForm (){
         {
           if(this.handleUpload1())
           {
-            console.log(this.validateForm.controls['ifcheck'].value);
+            //console.log(this.validateForm.controls['ifcheck'].value);
             this.enterService.addinfopicture(this.validateForm.controls['name'].value,
             this.validateForm.controls['dynasty'].value,
            this.validateForm.controls['place'].value,
@@ -81,11 +82,11 @@ confirmForm (){
          this.pathdoc,
        this.pathpic,
       this.validateForm.controls['ifcheck'].value,
-    this.tag_seq).subscribe(
+    this.tag_seq,this.validateForm.controls['ifcheckdown'].value).subscribe(
            data =>{
                if(data['errno'] === 0)
                {
-                 console.log("bingo！!!");
+                 //console.log("bingo！!!");
                  this.submitted = true;
                  this.nzMessageService.success('这是一条成功的提示,并将于10秒后消失', {nzDuration: 10000});
                  this.router.navigate(['home']);
@@ -98,7 +99,7 @@ confirmForm (){
           }
           else
           {
-            console.log("else1111111111111")
+            //console.log("else1111111111111")
             this.pathdoc = this.pathpic;
             this.enterService.addinfopicture(this.validateForm.controls['name'].value,
             this.validateForm.controls['dynasty'].value,
@@ -106,11 +107,11 @@ confirmForm (){
            this.validateForm.controls['type'].value,
          this.pathdoc,
        this.pathpic,
-       this.validateForm.controls['ifcheck'].value,this.tag_seq).subscribe(
+       this.validateForm.controls['ifcheck'].value,this.tag_seq,this.validateForm.controls['ifcheckdown'].value).subscribe(
            data =>{
                if(data['errno'] === 0)
                {
-                 console.log("bingo！!!");
+                 //console.log("bingo！!!");
                  this.submitted = true;
                  this.nzMessageService.success('这是一条成功的提示,并将于10秒后消失', {nzDuration: 10000});
                  this.router.navigate(['home']);
@@ -146,16 +147,16 @@ confirmForm (){
     previewVisible = false;
   
     handlePreview = (file: UploadFile) => {
-      console.log("url"+file.url);
-      console.log("thumbUrl"+file.thumbUrl)
-      console.log(file.name);
+      //console.log("url"+file.url);
+      //console.log("thumbUrl"+file.thumbUrl)
+      //console.log(file.name);
       this.previewImage = file.url || file.thumbUrl;
       this.previewVisible = true;
 
     }
     beforeUpload = (file: UploadFile): boolean => {
-      console.log(file);
-      console.log(this.fileList)
+      //console.log(file);
+      //console.log(this.fileList)
       this.namepic = file.name;
       this.pathpic = "img/"+file.name;
       //this.fileList.push(file);
@@ -164,7 +165,7 @@ confirmForm (){
     }
 
     handleUpload() {
-      console.log(this.namepic)
+      //console.log(this.namepic)
       if(this.namepic == null)
       {
         this.nzMessageService.error('图片上传为空')
@@ -176,23 +177,23 @@ confirmForm (){
         const formData = new FormData();
         
         this.fileList.forEach((file: any) => {
-          console.log(file);
+          //console.log(file);
           formData.append('file', file);
           
         });
         
         //formData.append('file',this.f);
-        console.log(this.f)
+        //console.log(this.f)
         this.uploading = true;
    
         const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploadpic', formData, {
            reportProgress: true
         });
-        console.log(req)
+        //console.log(req)
         this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
-          console.log(event['body']['errno'])
+          //console.log(event['body']['errno'])
           this.uploading = false;
-          this.nzMessageService.success('upload successfully.');
+          //this.nzMessageService.success('upload successfully.');
         }, (err) => {
           this.uploading = false;
           this.nzMessageService.error('upload failed.');
@@ -259,7 +260,7 @@ confirmForm (){
           this.tag_seq += tag_get[i]+';';
           
         }
-        console.log(this.tag_seq)
+        //console.log(this.tag_seq)
         
       }
       }

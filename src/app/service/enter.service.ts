@@ -30,7 +30,7 @@ export class EnterService implements OnInit{
     return this.http.post('http://localhost:8080/leave/auth/register', registerInfo, httpOptions);
   }
   public getLoadDoneList(username, pageIndex = 1, pageSize = 10){
-    console.log("开始post"+username);
+    //console.log("开始post"+username);
     const getLoadDoneListInfo = new HttpParams()
       .set("username", username)
       .set("page", pageIndex.toString())
@@ -45,7 +45,7 @@ export class EnterService implements OnInit{
       .set("pageSize", pageSize.toString());
     return this.http.post("http://localhost:8080/leave/load/selfList", getLoadDoneListInfo, httpOptions);
   }
-  public addinfopicture(name, dynasty, place, type, pathdoc, pathpic, ifcheck,tag_seq){
+  public addinfopicture(name, dynasty, place, type, pathdoc, pathpic, ifcheck,tag_seq,ifcheckdown){
     console.log(name);
     const pictureinfo = new HttpParams().
     set("name", name).
@@ -55,7 +55,8 @@ export class EnterService implements OnInit{
     set("pathdoc", pathdoc).
     set("pathpic",pathpic).
     set("ifcheck",ifcheck).
-    set("tag_seq",tag_seq)
+    set("tag_seq",tag_seq).
+    set("ifcheckdown",ifcheckdown);
     return this.http.post('http://localhost:8080/leave/add/addinfo', pictureinfo, httpOptions);
   }
   public getLoadDropList(username, pageIndex = 1, pageSize = 10){

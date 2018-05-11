@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
             // let navigationExtras: NavigationExtras = {
             //   queryParams: { 'username': data['data']['username'] },
             // };
-            console.log("bingo！")
+            //console.log("bingo！")
             this.checkUserService.login(data['data']['username']);
             // this.router.navigate(['main'], navigationExtras);
             this.router.navigate(['home']);
