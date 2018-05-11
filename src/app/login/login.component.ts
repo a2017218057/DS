@@ -80,5 +80,9 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[ key ].markAsPristine();
     }
   }
+  jumpregister(){
+
+    this.router.navigate(['register']);
+  }
 
 }

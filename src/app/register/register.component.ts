@@ -30,6 +30,9 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  jumplogin(){
+    this.router.navigate(['login']);
+  }
   ngOnInit(): void {
     console.log("RegisterPageComponent ngOnInit");
   }
