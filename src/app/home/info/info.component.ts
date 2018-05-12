@@ -49,8 +49,8 @@ export class InfoComponent implements OnInit {
                   this.tag = params['tag'];
                   this.name = params['name'];
                   //console.log(this.param)
-                  //console.log(this.cc)
-                  //console.log(this.tt)
+                  console.log(this.tag)
+                  console.log(this.name)
                   this.refreshData();
                 });
 
@@ -74,7 +74,7 @@ export class InfoComponent implements OnInit {
         this._current = 1;
       }
       this._loading = true;
-      if(this.name!=null&&this.tag!=null)
+      if((this.name!=''||this.tag!='')&&(this.name!=null||this.tag!=null))
       {
         this.enterService.searchinfo(this.name,this.tag,this.current_user, this._current, this._pageSize).subscribe((data: any)=>{
           console.log("搜索并刷新表格数据");
@@ -85,7 +85,7 @@ export class InfoComponent implements OnInit {
           
         });
       }
-      else if(this.name == null && this.tag == null)
+      else
       {
         if(this.self == 'self')
         {

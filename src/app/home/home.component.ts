@@ -15,14 +15,14 @@ import { InfoComponent } from './info/info.component';
 })
 export class HomeComponent implements OnInit {
   selectedMultipleOption = null;
-  tag_seq: String = '';
-  name_seq: String ='';
+  tag_seq: String = ''
+  name_seq: String = ''
   p;
   isCollapsed = false;
   triggerTemplate = null;
   
-  _namevalue = null;
-  _tagvalue = null;
+  _namevalue = '';
+  _tagvalue = '';
   @ViewChild(InfoComponent) infochild: InfoComponent;
     constructor(private router: Router,
                 private checkUserService: CheckUserService,
@@ -71,8 +71,8 @@ export class HomeComponent implements OnInit {
   searchTagsAndName(name_get:any,tag_get:any){
     //console.log(tag_get[0])
     this.tag_seq = '';
-    
-    if((tag_get==null&&name_get==' ')||(tag_get==' '&&name_get==null)||(tag_get==null&&name_get==null)||(tag_get==' '&&name_get==' ')){
+    this.name_seq = '';
+    if((tag_get==''&&name_get==' ')||(tag_get==' '&&name_get=='')||(tag_get==' '&&name_get==' ')){
       this.nzMessageService.create("error","名称和标签搜索不能为空或空格！")
     }
     else{
