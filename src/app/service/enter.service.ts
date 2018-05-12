@@ -81,8 +81,9 @@ export class EnterService implements OnInit{
     return this.http.post("http://localhost:8080/leave/apply/modify", updateInfo, httpOptions);
 
   }
-  public searchinfo(event,username,pageIndex,pageSize){
-    const searchinfo = new HttpParams().set('event',event).
+  public searchinfo(name,tag,username,pageIndex,pageSize){
+    const searchinfo = new HttpParams().set('name',name).
+    set("tag",tag).
     set("username", username)
     .set("page", pageIndex.toString())
     .set("pageSize", pageSize.toString());

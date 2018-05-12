@@ -16,11 +16,13 @@ import { InfoComponent } from './info/info.component';
 export class HomeComponent implements OnInit {
   selectedMultipleOption = null;
   tag_seq: String = '';
+  name_seq: String ='';
   p;
   isCollapsed = false;
   triggerTemplate = null;
   
-  _value = '';
+  _namevalue = null;
+  _tagvalue = null;
   @ViewChild(InfoComponent) infochild: InfoComponent;
     constructor(private router: Router,
                 private checkUserService: CheckUserService,
@@ -36,15 +38,6 @@ export class HomeComponent implements OnInit {
     this.p = this.activatedRoute.snapshot.params['id'];
     //console.log(this.p)
     
-  }
-  onSearch(event: string): void {
-    console.log(event);
-    this.p = event;
-     let navigationExtras: NavigationExtras = {
-               queryParams: { 'e': event},
-             };
-    this.router.navigate(['home/info/'],navigationExtras);
-    //this.router.navigate(['home/info/2']);
   }
   logout(){
     if (this.checkUserService.isLogin) {
@@ -75,22 +68,24 @@ export class HomeComponent implements OnInit {
         
   ];
 
-  searchTags(tag_get:any){
+  searchTagsAndName(name_get:any,tag_get:any){
     //console.log(tag_get[0])
     this.tag_seq = '';
-    if(tag_get==' '||tag_get==null){
-      this.nzMessageService.create("error","标签搜索不能为空或空格！")
+    
+    if((tag_get==null&&name_get==' ')||(tag_get==' '&&name_get==null)||(tag_get==null&&name_get==null)||(tag_get==' '&&name_get==' ')){
+      this.nzMessageService.create("error","名称和标签搜索不能为空或空格！")
     }
     else{
 
-      for(var i = 0 ; i < tag_get.length; i++){
-        this.tag_seq += tag_get[i] + ';';
-      }
-      //console.log(this.tag_seq)
+      this.tag_seq = tag_get;
+      this.name_seq = name_get;
+      console.log(this.name_seq+"和"+this.tag_seq)
+      let navigationExtras: NavigationExtras = {
+        queryParams: { 'tag': this.tag_seq,'name':this.name_seq},
+      };
+  this.router.navigate(['home/info/'],navigationExtras);
     }
-    let navigationExtras: NavigationExtras = {
-      queryParams: { 'tags': this.tag_seq},
-    };
-this.router.navigate(['home/info/'],navigationExtras);
+    
   }
+
 }

@@ -23,20 +23,14 @@
     <nz-header style="background: #108ee9; padding:0;">
       <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
 
-      <nz-input [nzType]="'search'" [nzPlaceHolder]="'input search text'" [(ngModel)]="_value" style="width: 200px;" (nzOnSearch)="onSearch($event)"></nz-input>
-      
+      <!--<nz-input [nzType]="'search'" [nzPlaceHolder]="'input search text'" [(ngModel)]="_value" style="width: 200px;" (nzOnSearch)="onSearch($event)"></nz-input>-->
+      <nz-input [nzType]="'text'" [(ngModel)]="_namevalue" [nzPlaceHolder]="'请输入名称'" style="width: 200px;" ></nz-input>
           
-        <nz-select nzTags style="width: 400px"  [nzSize]="'default'" [nzMode]="'multiple'"[(ngModel)]="selectedMultipleOption" [nzPlaceHolder]="'请输入标签'">
-          <nz-option
-              *ngFor="let option of searchOptions"
-              [nzLabel]="option.label"
-              [nzValue]="option">
-            </nz-option>
-        </nz-select>
+      <nz-input [nzType]="'text'" [(ngModel)]="_tagvalue" [nzPlaceHolder]="'请输入标签'" style="width: 200px;" ></nz-input>
       
       
       
-        <button nz-button [nzType]="'default'" [nzShape]="'circle'" (click)="searchTags(selectedMultipleOption)">
+        <button nz-button [nzType]="'default'" [nzShape]="'circle'" (click)="searchTagsAndName(_namevalue,_tagvalue)">
             <i class="anticon anticon-search"></i>
           </button>
         

@@ -34,8 +34,9 @@ export class InfoComponent implements OnInit {
   update_data;
   i;
   j;
-  cc;
-  tt;
+  self;
+  tag;
+  name;
   constructor(private checkUserService:CheckUserService,
               private enterService:EnterService,
               private confirmServ: NzModalService,
@@ -43,9 +44,10 @@ export class InfoComponent implements OnInit {
               public activatedRoute:ActivatedRoute) { 
 
                 this.activatedRoute.queryParams.subscribe(params => {
-                  this.param = params['e'];
-                  this.cc = params['self'];
-                  this.tt = params['tags']
+                  
+                  this.self = params['self'];
+                  this.tag = params['tag'];
+                  this.name = params['name'];
                   //console.log(this.param)
                   //console.log(this.cc)
                   //console.log(this.tt)
@@ -72,9 +74,9 @@ export class InfoComponent implements OnInit {
         this._current = 1;
       }
       this._loading = true;
-      if(this.param!=null)
+      if(this.name!=null&&this.tag!=null)
       {
-        this.enterService.searchinfo(this.param,this.current_user, this._current, this._pageSize).subscribe((data: any)=>{
+        this.enterService.searchinfo(this.name,this.tag,this.current_user, this._current, this._pageSize).subscribe((data: any)=>{
           console.log("搜索并刷新表格数据");
           
           this._loading = false;
@@ -83,20 +85,9 @@ export class InfoComponent implements OnInit {
           
         });
       }
-      else if(this.tt!=null)
+      else if(this.name == null && this.tag == null)
       {
-        this.enterService.searchtags(this.tt,this.current_user, this._current, this._pageSize).subscribe((data: any)=>{
-          console.log("搜索标签并刷新表格数据");
-          
-          this._loading = false;
-          this._total = data.data.total;
-          this._dataSet = data.data.list;
-          
-        });
-      }
-      else if(this.param == null && this.tt == null)
-      {
-        if(this.cc == 'self')
+        if(this.self == 'self')
         {
           this.enterService.getLoadSelfList(this.current_user, this._current, this._pageSize).subscribe((data: any) => {
             console.log("刷新个人表格数据");
