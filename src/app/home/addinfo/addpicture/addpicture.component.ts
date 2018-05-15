@@ -157,11 +157,21 @@ confirmForm (){
     beforeUpload = (file: UploadFile): boolean => {
       //console.log(file);
       //console.log(this.fileList)
+      const isJPG = file.type === 'image/jpeg';
+      const isPNG = file.type === 'image/png';
+      const isGIF = file.type === 'image/gif';
+    if (!isJPG&&!isPNG&&!isGIF) {
+      this.nzMessageService.error('您只可以上传JPG、PNG、GIF格式的图片！');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 0.2;
+    if (!isLt2M) {
+      this.nzMessageService.error('图片必须小于2M！');
+    }
       this.namepic = file.name;
       this.pathpic = "img/"+file.name;
       //this.fileList.push(file);
       this.f = file;
-      return true;
+      return (isJPG && isLt2M)||(isGIF&&isLt2M)||(isPNG&&isLt2M);
     }
 
     handleUpload() {
