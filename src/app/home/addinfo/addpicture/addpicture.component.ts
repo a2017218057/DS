@@ -42,7 +42,8 @@ export class AddpictureComponent implements OnInit {
         type            : [ '', [ Validators.required ] ],
         select_multiple :['', [ this.tagsnumber ]],
         ifcheck         :[true],
-        ifcheckdown     :[true]
+        ifcheckdown     :[true],
+
       });
       
 }
@@ -160,10 +161,11 @@ confirmForm (){
       const isJPG = file.type === 'image/jpeg';
       const isPNG = file.type === 'image/png';
       const isGIF = file.type === 'image/gif';
-    if (!isJPG&&!isPNG&&!isGIF) {
+      const isMP4 = file.type === 'video/mp4';
+    if (!isJPG&&!isPNG&&!isGIF&&!isMP4) {
       this.nzMessageService.error('您只可以上传JPG、PNG、GIF格式的图片！');
     }
-    const isLt2M = file.size / 1024 / 1024 < 0.2;
+    const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
       this.nzMessageService.error('图片必须小于2M！');
     }
@@ -214,15 +216,22 @@ confirmForm (){
     }
     beforeUpload1 = (file: UploadFile): boolean => {
       //this.f = file;
-      const isLt43M = file.size / 1024 / 1024 < 43;
-    if (!isLt43M) {
-      this.nzMessageService.error('文件应小于43MB!');
+      const isLt15M = file.size / 1024 / 1024 < 15;
+      const isMP4 = file.type === 'video/mp4';
+    if (!isMP4) {
+      this.nzMessageService.error('您只可以上传MP4F格式的文件！');
+    }
+    else if (!isLt15M) {
+      this.nzMessageService.error('文件应小于15MB!');
     }
     else
     {
+
       this.namedoc = file.name;
+      console.log(file.url+file.originFileObj+file.value);
       this.pathdoc = "doc/"+file.name;
       this.fileList1.push(file);
+      
     }
       return false;
     }
@@ -281,4 +290,5 @@ confirmForm (){
           return { tagsnumber: true, error: true };
         }
       };
+      
 }
