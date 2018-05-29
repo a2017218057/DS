@@ -41,6 +41,7 @@ export class CheckinfoComponent implements OnInit {
       this._pathdoc = "http://localhost:8080/"+this.currentData.pathdoc;
       this._id = this.currentData.id;
       this._uid = this.currentData.uid;
+      console.log(this.currentData)
   }
   test(){
     console.log(this._pathdoc)

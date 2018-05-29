@@ -8,13 +8,16 @@
         [nzFileList]="fileList1"
         [nzMultiple]="true"
         [nzLimit]="2"
-        [nzBeforeUpload]="beforeUpload1">
+        [nzBeforeUpload]="beforeUpload1"
+        >
         <button nz-button *ngIf="fileList1.length<3">
           <i class="anticon anticon-upload"></i><span>Upload</span>
         </button>
       </nz-upload>
+      
       </div>
-    
+      
+      
   <div nz-form-item nz-row>
         <div nz-form-label nz-col [nzSpan]="5">
             <label>预览图</label>

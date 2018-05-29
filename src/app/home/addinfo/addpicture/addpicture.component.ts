@@ -158,6 +158,7 @@ confirmForm (){
     beforeUpload = (file: UploadFile): boolean => {
       //console.log(file);
       //console.log(this.fileList)
+<<<<<<< HEAD
       const isJPG = file.type === 'image/jpeg';
       const isPNG = file.type === 'image/png';
       const isGIF = file.type === 'image/gif';
@@ -169,11 +170,13 @@ confirmForm (){
     if (!isLt2M) {
       this.nzMessageService.error('图片必须小于2M！');
     }
+=======
+>>>>>>> parent of e71c79f... 1
       this.namepic = file.name;
       this.pathpic = "img/"+file.name;
       //this.fileList.push(file);
       this.f = file;
-      return (isJPG && isLt2M)||(isGIF&&isLt2M)||(isPNG&&isLt2M);
+      return true;
     }
 
     handleUpload() {
