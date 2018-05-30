@@ -2,7 +2,7 @@
 [nzAjaxData]="_dataSet"
 [nzShowSizeChanger]="true"
 [nzLoading]="_loading"
-[nzTotal]="_total"
+[(nzTotal)]="_total"
 [(nzPageIndex)]="_current"
 (nzPageIndexChange)="refreshData()"
 [(nzPageSize)]="_pageSize"
@@ -50,7 +50,7 @@
 </tr>
 </tbody>
 </nz-table>
-<nz-modal [nzVisible]="isVisible" [nzWidth]="500" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)" >
+<nz-modal [nzVisible]="isVisible" [nzWidth]="700" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)" >
 <ng-template #modalTitle>
 详情
 </ng-template>

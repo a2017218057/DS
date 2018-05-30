@@ -20,10 +20,15 @@ export class AddpictureComponent implements OnInit {
   tag_seq:String = '';
   fileList: UploadFile[] = [];
   fileList1: UploadFile[] = [];
+  fileList2: UploadFile[] = [];
   pathdoc:any;
   pathpic:any;
+  pathpreview:any;
+  pathmovie:any;
+  ispic:boolean;
   namedoc = null;
   namepic = null;
+  namepreview = null;
   f : any;
   picname: String;
   smallpic: String;
@@ -69,71 +74,45 @@ confirmForm (){
       {
         this.nzMessageService.error('请填写内容', {nzDuration: 10000});
       }
+      
       else
       {
-        if(this.handleUpload())
-        {
-          if(this.handleUpload1())
-          {
-            //console.log(this.validateForm.controls['ifcheck'].value);
-            this.enterService.addinfopicture(this.validateForm.controls['name'].value,
-            this.validateForm.controls['dynasty'].value,
-           this.validateForm.controls['place'].value,
-           this.validateForm.controls['type'].value,
-         this.pathdoc,
-       this.pathpic,
-      this.validateForm.controls['ifcheck'].value,
-    this.tag_seq,this.validateForm.controls['ifcheckdown'].value).subscribe(
-           data =>{
-               if(data['errno'] === 0)
-               {
-                 //console.log("bingo！!!");
-                 this.submitted = true;
-                 this.nzMessageService.success('这是一条成功的提示,并将于10秒后消失', {nzDuration: 10000});
-                 this.router.navigate(['home']);
-               }
-           },
-           err =>{
-  
-           }
-           );
-          }
-          else
-          {
-            //console.log("else1111111111111")
-            this.pathdoc = this.pathpic;
-            this.enterService.addinfopicture(this.validateForm.controls['name'].value,
-            this.validateForm.controls['dynasty'].value,
-           this.validateForm.controls['place'].value,
-           this.validateForm.controls['type'].value,
-         this.pathdoc,
-       this.pathpic,
-       this.validateForm.controls['ifcheck'].value,this.tag_seq,this.validateForm.controls['ifcheckdown'].value).subscribe(
-           data =>{
-               if(data['errno'] === 0)
-               {
-                 //console.log("bingo！!!");
-                 this.submitted = true;
-                 this.nzMessageService.success('这是一条成功的提示,并将于10秒后消失', {nzDuration: 10000});
-                 this.router.navigate(['home']);
-               }
-           },
-           err =>{
-  
-           }
-           );
-          }
-          
-       }
+        if(this.handleUpload1()&&this.handleUpload2()){
+          this.enterService.addinfopicture(this.validateForm.controls['name'].value,
+          this.validateForm.controls['dynasty'].value,
+         this.validateForm.controls['place'].value,
+         this.validateForm.controls['type'].value,
+       this.pathdoc,
+     this.pathpreview,
+    this.validateForm.controls['ifcheck'].value,
+  this.tag_seq,this.validateForm.controls['ifcheckdown'].value,this.ispic,this.pathmovie).subscribe(
+         data =>{
+             if(data['errno'] === 0)
+             {
+               //console.log("bingo！!!");
+               this.submitted = true;
+               this.nzMessageService.success('这是一条成功的提示,并将于10秒后消失', {nzDuration: 10000});
+               this.router.navigate(['home']);
+             }
+         },
+         err =>{
+
+         }
+         );
+        }
+        
        else
        {
-          this.nzMessageService.error('请上传预览图！'); 
+          this.nzMessageService.error('请上传文件！'); 
        }
         }    
       
     }
   
-
+    beforeUpload = (file: UploadFile): boolean => {
+      this.fileList.push(file);
+      return false;
+    }
   
     
     ngOnInit() {
@@ -144,6 +123,7 @@ confirmForm (){
       return this.validateForm.controls[ name ];
     }
 
+    /*
     previewImage = '';
     previewVisible = false;
   
@@ -158,7 +138,6 @@ confirmForm (){
     beforeUpload = (file: UploadFile): boolean => {
       //console.log(file);
       //console.log(this.fileList)
-<<<<<<< HEAD
       const isJPG = file.type === 'image/jpeg';
       const isPNG = file.type === 'image/png';
       const isGIF = file.type === 'image/gif';
@@ -170,8 +149,6 @@ confirmForm (){
     if (!isLt2M) {
       this.nzMessageService.error('图片必须小于2M！');
     }
-=======
->>>>>>> parent of e71c79f... 1
       this.namepic = file.name;
       this.pathpic = "img/"+file.name;
       //this.fileList.push(file);
@@ -217,25 +194,24 @@ confirmForm (){
       }
       
     }
+    */
+   
     beforeUpload1 = (file: UploadFile): boolean => {
       //this.f = file;
-      const isLt15M = file.size / 1024 / 1024 < 15;
-      const isMP4 = file.type === 'video/mp4';
-    if (!isMP4) {
-      this.nzMessageService.error('您只可以上传MP4F格式的文件！');
+      const isLt15M = file.size / 1024 / 1024 < 40;
+      
+    if (!isLt15M) {
+      this.nzMessageService.error('文件应小于40MB!');
     }
-    else if (!isLt15M) {
-      this.nzMessageService.error('文件应小于15MB!');
-    }
-    else
-    {
+    
 
       this.namedoc = file.name;
-      console.log(file.url+file.originFileObj+file.value);
-      this.pathdoc = "doc/"+file.name;
+      console.log(file.name);
+      this.pathdoc = "doc/"+file.name.replace(/\+/g, '%2B');
+      console.log(this.pathdoc)
       this.fileList1.push(file);
-      
-    }
+      console.log(this.fileList1)
+
       return false;
     }
     handleUpload1() { //文件
@@ -267,10 +243,72 @@ confirmForm (){
       } 
       
       }
-      searchOptions = [
+
+      beforeUpload2 = (file: UploadFile): boolean => {       //预览文件
+        //this.f = file;
+        const isLt15M = file.size / 1024 / 1024 < 15;
+        const isMP4 = file.type === 'video/mp4';
+        const isJPG = file.type === 'image/jpeg';
+        const isPNG = file.type === 'image/png';
+        const isGIF = file.type === 'image/gif';
         
+      if (!isJPG&&!isPNG&&!isGIF&&!isMP4) {
+        this.nzMessageService.error('您只可以上传JPG、PNG、GIF、MP4格式的文件！');
+      }
+      else if (!isLt15M) {
+        this.nzMessageService.error('文件应小于15MB!');
+      }
+      else
+      {
+        if(isMP4){
+          this.pathpreview = "preview/videopic.jpg";
+          this.pathmovie = "preview/"+file.name;
+          this.fileList2.push(file);
+          this.ispic = false;
+        }
+        else{
+    
+        this.namepreview = file.name;
+        console.log(file.filename+file.name+file.type);
+        this.pathpreview = "preview/"+file.name;
+        this.ispic = true;
+        this.fileList2.push(file);
+              
+      }
+      }
+        return false;
+      }
+      handleUpload2() { //预览文件
+        //this.fileList.push(this.f);
+        if(this.namedoc == null)
+        {
+          this.nzMessageService.error('文件上传为空')
+          return false;
+        }
+        else
+        {
+          const formData = new FormData();
+          this.fileList2.forEach((file: any) => {
+            formData.append('file', file);
+          });
+          this.uploading = true;
+          // You can use any AJAX library you like
+          const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploadpreview', formData, {
+            // reportProgress: true
+          });
+          this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
+            this.uploading = false;
+            //this.nzMessageService.success('upload successfully.');
+          }, (err) => {
+            this.uploading = false;
+            this.nzMessageService.error('upload failed.');
+          });
+          return true;
+        } 
         
-      ];
+        }
+
+     
       change(tag_get: any){
         
         this.tag_seq = ''

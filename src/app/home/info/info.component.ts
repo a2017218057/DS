@@ -20,7 +20,7 @@ export class InfoComponent implements OnInit {
    _total = 1;
    _dataSet = [];
    _loading = false;
-
+  defaulpageindex = 1;
    // 提示框变量
   isVisible = false;
   isConfirmLoading = false;
@@ -51,7 +51,7 @@ export class InfoComponent implements OnInit {
                   //console.log(this.param)
                   console.log(this.tag)
                   console.log(this.name)
-                  this.refreshData();
+                  this.refreshData(true);
                 });
 
               }
@@ -76,25 +76,28 @@ export class InfoComponent implements OnInit {
       this._loading = true;
       if((this.name!=''||this.tag!='')&&(this.name!=null||this.tag!=null))
       {
-        this.enterService.searchinfo(this.name,this.tag,this.current_user, this._current, this._pageSize).subscribe((data: any)=>{
+        
+        this.enterService.searchinfo(this.name,this.tag,this.current_user, this.defaulpageindex, this._pageSize).subscribe((data: any)=>{
           console.log("搜索并刷新表格数据");
-          
+          console.log(this._current)
           this._loading = false;
           this._total = data.data.total;
           this._dataSet = data.data.list;
           
+          console.log("total:"+this._total)
         });
       }
       else
       {
         if(this.self == 'self')
         {
-          this.enterService.getLoadSelfList(this.current_user, this._current, this._pageSize).subscribe((data: any) => {
+          this.enterService.getLoadSelfList(this.current_user, this.defaulpageindex, this._pageSize).subscribe((data: any) => {
             console.log("刷新个人表格数据");
             
             this._loading = false;
             this._total = data.data.total;
             this._dataSet = data.data.list;
+            
             //console.log(this._dataSet)
           });
         }

@@ -45,7 +45,7 @@ export class EnterService implements OnInit{
       .set("pageSize", pageSize.toString());
     return this.http.post("http://localhost:8080/leave/load/selfList", getLoadDoneListInfo, httpOptions);
   }
-  public addinfopicture(name, dynasty, place, type, pathdoc, pathpic, ifcheck,tag_seq,ifcheckdown){
+  public addinfopicture(name, dynasty, place, type, pathdoc, pathpreview, ifcheck,tag_seq,ifcheckdown,ispic,pathmovie){
     console.log(name);
     const pictureinfo = new HttpParams().
     set("name", name).
@@ -53,10 +53,12 @@ export class EnterService implements OnInit{
     set("place", place).
     set("type", type).
     set("pathdoc", pathdoc).
-    set("pathpic",pathpic).
+    set("pathpreview",pathpreview).
     set("ifcheck",ifcheck).
     set("tag_seq",tag_seq).
-    set("ifcheckdown",ifcheckdown);
+    set("ifcheckdown",ifcheckdown).
+    set("ispic",ispic).
+    set("pathmovie",pathmovie);
     return this.http.post('http://localhost:8080/leave/add/addinfo', pictureinfo, httpOptions);
   }
   public getLoadDropList(username, pageIndex = 1, pageSize = 10){

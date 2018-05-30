@@ -84,6 +84,8 @@ export class HomeComponent implements OnInit {
         queryParams: { 'tag': this.tag_seq,'name':this.name_seq},
       };
   this.router.navigate(['home/info/'],navigationExtras);
+   this._namevalue = '';
+   this._tagvalue = '';
     }
     
   }

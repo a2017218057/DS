@@ -1,5 +1,5 @@
 <form nz-form [nzType]="'horizontal'" [formGroup]="validateFormUpdate">
-    <div nz-form-item nz-row>
+    <div nz-form-item nz-row *ngIf="currentData.ispic">
         <div nz-form-label nz-col [nzSpan]="5">
           <label>预览图</label>
         </div>
@@ -9,19 +9,19 @@
         </div>
         
       </div>
-      <!--
-    <div nz-form-item nz-row>
+      
+    <div nz-form-item nz-row *ngIf="!currentData.ispic">
         <div nz-form-label nz-col [nzSpan]="5">
           <label>预览视频</label>
         </div>
        
         <div nz-form-control [nzValidateStatus]="'success'" nz-col [nzSpan]="12">
         <video width="320" height="240" controls controlsList='nodownload'>
-          <source src="http://localhost:8080/{{currentData.pathdoc}}" type="video/mp4">
+          <source src="http://localhost:8080/{{currentData.pathmovie}}" type="video/mp4">
         </video>
       </div>
       </div>
-    -->
+    
       <div nz-form-item nz-row>
           <div nz-form-label nz-col [nzSpan]="5">
             <label>文件路径</label>

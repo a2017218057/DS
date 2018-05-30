@@ -33,7 +33,16 @@ export class CheckinfoComponent implements OnInit {
    }
 
   ngOnInit() {
-    this._name = this.currentData.name;
+    
+  }
+  test(){
+    console.log(this._pathdoc)
+    console.log(this.currentData.pathdoc)
+    window.open('http://localhost:8080/leave/download/doc?pathdoc='+this.currentData.pathdoc.replace(/\+/g, '%2B'),'下载文件')
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.currentData) {
+      this._name = this.currentData.name;
       this._dynasty = this.currentData.dynasty;
       this._place = this.currentData.place;
       this._type = this.currentData.type;
@@ -42,10 +51,7 @@ export class CheckinfoComponent implements OnInit {
       this._id = this.currentData.id;
       this._uid = this.currentData.uid;
       console.log(this.currentData)
-  }
-  test(){
-    console.log(this._pathdoc)
-    window.open('http://localhost:8080/leave/download/doc?pathdoc='+this.currentData.pathdoc,'下载文件')
+    }
   }
 
 }
