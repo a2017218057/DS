@@ -111,15 +111,15 @@
       <label>标签</label>
     </div>
     <div nz-col [nzSpan]="10" nz-form-control nzHasFeedback>
-  <nz-select nzTags  formControlName="select_multiple" (nzOpenChange)="change(selectedMultipleOption)" [nzSize]="'large'" [nzMode]="'multiple'" [(ngModel)]="selectedMultipleOption" [nzPlaceHolder]="'按回车添加标签'">
+  <nz-select nzTags  nzAutosize formControlName="select_multiple" (nzOpenChange)="change(selectedMultipleOption)" [nzSize]="'large'" [nzMode]="'multiple'" [(ngModel)]="selectedMultipleOption" [nzPlaceHolder]="'按回车添加标签'">
     <nz-option
         *ngFor="let option of searchOptions"
         [nzLabel]="option.label"
         [nzValue]="option">
       </nz-option>
   </nz-select>
-  <div nz-form-explain *ngIf="getFormControl('select_multiple').dirty&&getFormControl('select_multiple').hasError('tagsnumber')">请输入标签且不能为空格！</div>
-  <div nz-form-explain *ngIf="getFormControl('select_multiple').dirty&&getFormControl('select_multiple').hasError('required')">最多输入8个标签！</div>
+  <div nz-form-explain *ngIf="getFormControl('select_multiple').dirty&&getFormControl('select_multiple').hasError('tagsnumber')">最多输入8个标签且不能为空格！</div>
+  
 </div>
 
 </div>

@@ -5,6 +5,7 @@ import {
   Validators,
   FormControl
 } from '@angular/forms';
+import { CheckUserService } from '../../../service/check-user.service';
 import { EnterService } from '../../../service/enter.service';
 import {NzMessageService, UploadFile} from 'ng-zorro-antd';
 import {NavigationExtras, Router} from "@angular/router";
@@ -35,7 +36,9 @@ export class AddpictureComponent implements OnInit {
   validateForm: FormGroup;
   submitted = false;
   uploading = false;
-  constructor(private fb: FormBuilder,
+  constructor(
+    private checkUserService:CheckUserService,
+    private fb: FormBuilder,
     private enterService: EnterService,
     private nzMessageService: NzMessageService,
     private router: Router,
@@ -45,7 +48,7 @@ export class AddpictureComponent implements OnInit {
         dynasty          : [ '', [ Validators.required ]],
         place            : [ '', [ Validators.required]],
         type            : [ '', [ Validators.required ] ],
-        select_multiple :['', [ this.tagsnumber ]],
+        select_multiple :['', [ this.tagsnumber]],
         ifcheck         :[true],
         ifcheckdown     :[true],
 
@@ -198,20 +201,24 @@ confirmForm (){
    
     beforeUpload1 = (file: UploadFile): boolean => {
       //this.f = file;
-      const isLt15M = file.size / 1024 / 1024 < 40;
+      const isLt15M = file.size / 1024 / 1024 < 45;
       
     if (!isLt15M) {
       this.nzMessageService.error('文件应小于40MB!');
     }
     
-
+    else{
       this.namedoc = file.name;
-      console.log(file.name);
-      this.pathdoc = "doc/"+file.name.replace(/\+/g, '%2B');
+      var timetemp = new Date().getTime();
+      
+      //console.log(file.name);
+      //this.pathdoc = file.name.replace(/\+/g, '%2B');
+      var doctype = file.name.substring(file.name.lastIndexOf("."))
+      this.pathdoc = this.checkUserService.current_user+timetemp+doctype;
       console.log(this.pathdoc)
       this.fileList1.push(file);
-      console.log(this.fileList1)
-
+      //console.log(this.fileList1)
+    }
       return false;
     }
     handleUpload1() { //文件
@@ -227,6 +234,7 @@ confirmForm (){
         this.fileList1.forEach((file: any) => {
           formData.append('file', file);
         });
+        formData.append('filepath',this.pathdoc)
         this.uploading = true;
         // You can use any AJAX library you like
         const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploaddoc', formData, {
@@ -260,17 +268,20 @@ confirmForm (){
       }
       else
       {
+        var pretype = file.name.substring(file.name.lastIndexOf("."))
         if(isMP4){
-          this.pathpreview = "preview/videopic.jpg";
-          this.pathmovie = "preview/"+file.name;
+          var timetemp = new Date().getTime();
+          
+          this.pathpreview = "videopic.jpg";
+          this.pathmovie = this.checkUserService.current_user+timetemp+pretype;
           this.fileList2.push(file);
           this.ispic = false;
         }
         else{
-    
+        var timetemp = new Date().getTime();
         this.namepreview = file.name;
         console.log(file.filename+file.name+file.type);
-        this.pathpreview = "preview/"+file.name;
+        this.pathpreview = this.checkUserService.current_user+timetemp+pretype;
         this.ispic = true;
         this.fileList2.push(file);
               
@@ -291,6 +302,7 @@ confirmForm (){
           this.fileList2.forEach((file: any) => {
             formData.append('file', file);
           });
+          formData.append('filepath',this.pathpreview)
           this.uploading = true;
           // You can use any AJAX library you like
           const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploadpreview', formData, {
@@ -320,7 +332,9 @@ confirmForm (){
           this.tag_seq += tag_get[i]+';';
           
         }
-        //console.log(this.tag_seq)
+        //console.log(this.tag_seq.length)
+        this.tag_seq = this.tag_seq.substring(0,this.tag_seq.length-1);
+        //console.log(this.tag_seq.substring(0,this.tag_seq.length-1))
         
       }
       }

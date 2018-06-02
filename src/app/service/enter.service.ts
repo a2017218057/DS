@@ -74,6 +74,7 @@ export class EnterService implements OnInit{
     return this.http.post('http://localhost:8080/leave/apply/delete', deleteInfo, httpOptions);
   }
   public updateInfo(params){
+    console.log(params)
     let queryString = "";
     for (const key in params){
       queryString += key + "=" + params[key] + "&";

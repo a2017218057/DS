@@ -1,12 +1,26 @@
 <form nz-form [nzType]="'horizontal'" [formGroup]="validateFormUpdate">
-    <div nz-form-item nz-row>
-        <div nz-form-label nz-col [nzSpan]="5">
-          <label>预览图</label>
-        </div>
-        <div nz-form-control [nzValidateStatus]="'success'" nzHasFeedback nz-col [nzSpan]="12">
-            <img style="width:334px;height:auto" align="middle" src="http://localhost:8080/{{currentData.pathpic}}"  />
-        </div>
-      </div>
+  <div nz-form-item nz-row *ngIf="currentData.ispic">
+    <div nz-form-label nz-col [nzSpan]="5">
+      <label>预览图</label>
+    </div>
+    
+    <div nz-form-control [nzValidateStatus]="'success'" nz-col [nzSpan]="12">
+        <img style="width:300px;height:200px" align="middle" src="http://localhost:8080/{{currentData.pathpic}}"  />
+    </div>
+    
+  </div>
+  
+<div nz-form-item nz-row *ngIf="!currentData.ispic">
+    <div nz-form-label nz-col [nzSpan]="5">
+      <label>预览视频</label>
+    </div>
+   
+    <div nz-form-control [nzValidateStatus]="'success'" nz-col [nzSpan]="12">
+    <video width="320" height="240" controls controlsList='nodownload'>
+      <source src="http://localhost:8080/{{currentData.pathmovie}}" type="video/mp4">
+    </video>
+  </div>
+  </div>
       <div nz-form-item nz-row>
           <div nz-form-label nz-col [nzSpan]="5">
             <label>文件路径</label>
@@ -48,11 +62,26 @@
     <div nz-form-label nz-col [nzSpan]="5">
       <label>类型</label>
     </div>
-    <div nz-form-control nz-col [nzSpan]="12" [nzValidateStatus]="'success'" nzHasFeedback>
+    <div nz-form-control nz-col [nzSpan]="12" nzHasFeedback>
       <nz-input formControlName="typeUpdate" [(ngModel)]="_type" [nzSize]="'large'" name="successValid">
       </nz-input>
     </div>
   </div>
+  <div nz-form-item nz-row>
+    <div nz-form-label nz-col [nzSpan]="5">
+      <label>标签</label>
+    </div>
+    <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+  <nz-select nzTags nzAutosize formControlName="select_multiple" (nzOpenChange)="change(selectedMultipleOption)" [nzSize]="'large'" [nzMode]="'multiple'" [(ngModel)]="selectedMultipleOption" >
+    <nz-option
+        *ngFor="let option of searchOptions"
+        [nzLabel]="option"
+        [nzValue]="option">
+      </nz-option>
+  </nz-select>
+  <div nz-form-explain *ngIf="getFormControl('select_multiple').dirty&&getFormControl('select_multiple').hasError('tagsnumber')">最多输入8个标签且不能为空格！</div>
+</div>
+</div>
   <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="5">
         <label>上传时间</label>

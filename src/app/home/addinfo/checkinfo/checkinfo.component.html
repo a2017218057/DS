@@ -74,6 +74,20 @@
     </div>
   </div>
   <div nz-form-item nz-row>
+    <div nz-form-label nz-col [nzSpan]="5">
+      <label>标签</label>
+    </div>
+    <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+  <nz-select nzTags nzAutosize [nzDisabled]="true" formControlName="select_multiple" [nzSize]="'large'" [nzMode]="'multiple'" [(ngModel)]="selectedMultipleOption" >
+    <nz-option
+        *ngFor="let option of searchOptions"
+        [nzLabel]="option"
+        [nzValue]="option">
+      </nz-option>
+  </nz-select>
+</div>
+</div>
+  <div nz-form-item nz-row>
       <div nz-form-label nz-col [nzSpan]="5">
         <label>上传时间</label>
       </div>
