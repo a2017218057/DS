@@ -36,6 +36,7 @@ export class AddpictureComponent implements OnInit {
   validateForm: FormGroup;
   submitted = false;
   uploading = false;
+  flag:any;
   constructor(
     private checkUserService:CheckUserService,
     private fb: FormBuilder,
@@ -270,6 +271,8 @@ confirmForm (){
       {
         var pretype = file.name.substring(file.name.lastIndexOf("."))
         if(isMP4){
+          this.flag = 1;
+          console.log("是MP4！")
           var timetemp = new Date().getTime();
           
           this.pathpreview = "videopic.jpg";
@@ -278,6 +281,7 @@ confirmForm (){
           this.ispic = false;
         }
         else{
+          this.flag = 0;
         var timetemp = new Date().getTime();
         this.namepreview = file.name;
         console.log(file.filename+file.name+file.type);
@@ -298,24 +302,47 @@ confirmForm (){
         }
         else
         {
-          const formData = new FormData();
-          this.fileList2.forEach((file: any) => {
-            formData.append('file', file);
-          });
-          formData.append('filepath',this.pathpreview)
-          this.uploading = true;
-          // You can use any AJAX library you like
-          const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploadpreview', formData, {
-            // reportProgress: true
-          });
-          this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
-            this.uploading = false;
-            //this.nzMessageService.success('upload successfully.');
-          }, (err) => {
-            this.uploading = false;
-            this.nzMessageService.error('upload failed.');
-          });
-          return true;
+          if(this.flag == 1){
+            const formData = new FormData();
+            this.fileList2.forEach((file: any) => {
+              formData.append('file', file);
+            });
+            formData.append('filepath',this.pathmovie)
+            this.uploading = true;
+            // You can use any AJAX library you like
+            const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploadpreview', formData, {
+              // reportProgress: true
+            });
+            this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
+              this.uploading = false;
+              //this.nzMessageService.success('upload successfully.');
+            }, (err) => {
+              this.uploading = false;
+              this.nzMessageService.error('upload failed.');
+            });
+            return true;
+          }
+          else if(this.flag == 0){
+            const formData = new FormData();
+            this.fileList2.forEach((file: any) => {
+              formData.append('file', file);
+            });
+            formData.append('filepath',this.pathpreview)
+            this.uploading = true;
+            // You can use any AJAX library you like
+            const req = new HttpRequest('POST', 'http://localhost:8080/leave/add/uploadpreview', formData, {
+              // reportProgress: true
+            });
+            this.http.request(req).pipe(filter(e => e instanceof HttpResponse)).subscribe((event: any) => {
+              this.uploading = false;
+              //this.nzMessageService.success('upload successfully.');
+            }, (err) => {
+              this.uploading = false;
+              this.nzMessageService.error('upload failed.');
+            });
+            return true;
+          }
+          
         } 
         
         }
