@@ -91,7 +91,7 @@ export class InfoComponent implements OnInit {
       {
         if(this.self == 'self')
         {
-          this.enterService.getLoadSelfList(this.current_user, this.defaulpageindex, this._pageSize).subscribe((data: any) => {
+          this.enterService.getLoadSelfList(this.current_user, this._current, this._pageSize).subscribe((data: any) => {
             console.log("刷新个人表格数据");
             
             this._loading = false;
