@@ -105,4 +105,12 @@ export class EnterService implements OnInit{
     return this.http.post('http://localhost:8080/leave/download/pic', downloadinfo, httpOptions)
 
   }
+  public totaluser(){
+    const totaluserinfo = new HttpParams()
+    return this.http.post('http://localhost:8080/leave/statistics/totaluser', totaluserinfo, httpOptions)
+  }
+  public totaldoc(){
+    const totaldocinfo = new HttpParams()
+    return this.http.post('http://localhost:8080/leave/statistics/totaldoc', totaldocinfo, httpOptions)
+  }
 }

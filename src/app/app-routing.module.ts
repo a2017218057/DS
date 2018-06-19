@@ -7,11 +7,13 @@ import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './home/info/info.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { AddinfoComponent } from './home/addinfo/addinfo.component';
+import { TongjiComponent } from './tongji/tongji.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component : LoginComponent},
   {path: 'register', component : RegisterComponent},
+  {path: 'tongji', component : TongjiComponent},
   {
     path: 'home',
     component : HomeComponent,

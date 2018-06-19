@@ -1,0 +1,19 @@
+<nz-tabset>
+  <nz-tab>
+    <ng-template #nzTabHeading>
+      用户统计
+    </ng-template>
+    <span>用户总数：{{totaluser}}人</span>
+    
+  </nz-tab>
+  <nz-tab>
+    <ng-template #nzTabHeading>
+      文件统计
+    </ng-template>
+    <span>文件总数：{{totaldoc}}个</span><br /><br />
+    <span>可下载文件总数：{{totalisdown}}个</span><br /><br />
+    <span>可下载文件比例：{{perdown}}个</span><br /><br />
+    <span>可查看文件总数：{{totalischeck}}个</span><br /><br />
+    <span>可查看文件比例：{{percheck}}个</span><br /><br />
+  </nz-tab>
+</nz-tabset>

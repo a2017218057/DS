@@ -18,6 +18,7 @@ import { AddpictureComponent } from './home/addinfo/addpicture/addpicture.compon
 import { UpdateinfoComponent } from './home/addinfo/updateinfo/updateinfo.component';
 import { UploadpicService } from './service/uploadpic.service';
 import { CheckinfoComponent } from './home/addinfo/checkinfo/checkinfo.component';
+import { TongjiComponent } from './tongji/tongji.component';
 
 
 
@@ -32,6 +33,7 @@ import { CheckinfoComponent } from './home/addinfo/checkinfo/checkinfo.component
     AddpictureComponent,
     UpdateinfoComponent,
     CheckinfoComponent,
+    TongjiComponent,
   ],
   imports: [
     BrowserModule,
