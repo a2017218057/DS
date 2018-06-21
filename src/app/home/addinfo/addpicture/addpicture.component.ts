@@ -12,6 +12,7 @@ import {NavigationExtras, Router} from "@angular/router";
 import { UploadpicService } from '../../../service/uploadpic.service';
 import { HttpRequest, HttpClient, HttpResponse } from '@angular/common/http';
 import { filter } from 'rxjs/operators';
+import { IpService } from '../../../service/ip.service';
 @Component({
   selector: 'app-addpicture',
   templateUrl: './addpicture.component.html',
@@ -41,6 +42,7 @@ export class AddpictureComponent implements OnInit {
     private checkUserService:CheckUserService,
     private fb: FormBuilder,
     private enterService: EnterService,
+    private ipService: IpService,
     private nzMessageService: NzMessageService,
     private router: Router,
     private uploadpicService: UploadpicService,private http: HttpClient ) {
@@ -214,7 +216,7 @@ confirmForm (){
       //this.pathdoc = file.name.replace(/\+/g, '%2B');
       var doctype = file.name.substring(file.name.lastIndexOf("."))
       this.pathdoc = this.checkUserService.current_user+timetemp+doctype;
-      console.log(this.pathdoc)
+      //console.log(this.pathdoc)
       this.fileList1.push(file);
       //console.log(this.fileList1)
     }
@@ -270,7 +272,7 @@ confirmForm (){
         var pretype = file.name.substring(file.name.lastIndexOf("."))
         if(isMP4){
           this.flag = 1;
-          console.log("是MP4！")
+          //console.log("是MP4！")
           var timetemp = new Date().getTime();
           
           this.pathpreview = "videopic.jpg";
@@ -345,7 +347,10 @@ confirmForm (){
         
         }
 
-     
+      /**
+       * 
+       * @param tag_get 
+       */
       change(tag_get: any){
         
         this.tag_seq = ''

@@ -13,6 +13,7 @@ import { InfoComponent } from './home/info/info.component';
 import { EnterService } from './service/enter.service';
 import { CheckUserService } from './service/check-user.service';
 import { AuthGuardService } from './service/auth-guard.service';
+import { IpService } from './service/ip.service';
 import { AddinfoComponent } from './home/addinfo/addinfo.component';
 import { AddpictureComponent } from './home/addinfo/addpicture/addpicture.component';
 import { UpdateinfoComponent } from './home/addinfo/updateinfo/updateinfo.component';
@@ -44,7 +45,7 @@ import { TongjiComponent } from './tongji/tongji.component';
     NgZorroAntdModule.forRoot(),
     AppRoutingModule,
   ],
-  providers: [EnterService,CheckUserService,AuthGuardService,UploadpicService],
+  providers: [EnterService,CheckUserService,AuthGuardService,UploadpicService,IpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

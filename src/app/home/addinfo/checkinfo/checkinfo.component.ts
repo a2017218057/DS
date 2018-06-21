@@ -1,6 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { EnterService } from '../../../service/enter.service';
+import { IpService } from '../../../service/ip.service';
 
 @Component({
   selector: 'app-checkinfo',
@@ -23,7 +24,7 @@ export class CheckinfoComponent implements OnInit {
   searchOptions;
   list;
   arr;
-  constructor(private fb: FormBuilder,private enterService: EnterService) {
+  constructor(private fb: FormBuilder,private enterService: EnterService,private ipService: IpService) {
     this.validateFormUpdate = this.fb.group({
       nameUpdate          : [ '', [ Validators.required ]],
       dynastyUpdate           : [ '' , [ Validators.required ]],
@@ -40,6 +41,7 @@ export class CheckinfoComponent implements OnInit {
   ngOnInit() {
     
   }
+  
   test(){
     //console.log(this._pathdoc)
     //console.log(this.currentData.pathdoc)

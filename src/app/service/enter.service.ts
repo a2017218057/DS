@@ -1,6 +1,7 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
+import { IpService } from './ip.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,22 +13,30 @@ const httpOptions = {
 @Injectable()
 export class EnterService implements OnInit{
 
-  constructor(private http: HttpClient) { }
+  ip = 'http://localhost:8080'
+  /**
+   * 
+   * @param http 
+   * @param ipService 保存ip供所有模块使用
+   */
+  constructor(private http: HttpClient,private ipService: IpService,) {
+    //console.log(this.ipService.visit())
+   }
 
   ngOnInit(): void {
   }
 
   public login(username, password){
     const loginInfo = new HttpParams().set("username", username).set("password", password);
-    return this.http.post('http://localhost:8080/leave/auth/login', loginInfo, httpOptions);
+    return this.http.post(this.ip+'/leave/auth/login', loginInfo, httpOptions);
   }
   public logout(){
     const logoutInfo = new HttpParams();
-    return this.http.post('http://localhost:8080/leave/auth/logout',logoutInfo,httpOptions);
+    return this.http.post(this.ip+'/leave/auth/logout',logoutInfo,httpOptions);
   }
   public register(username,password){
     const registerInfo = new HttpParams().set("username", username).set("password", password);
-    return this.http.post('http://localhost:8080/leave/auth/register', registerInfo, httpOptions);
+    return this.http.post(this.ip+'/leave/auth/register', registerInfo, httpOptions);
   }
   public getLoadDoneList(username, pageIndex = 1, pageSize = 10){
     //console.log("开始post"+username);
@@ -35,7 +44,7 @@ export class EnterService implements OnInit{
       .set("username", username)
       .set("page", pageIndex.toString())
       .set("pageSize", pageSize.toString());
-    return this.http.post("http://localhost:8080/leave/load/doneList", getLoadDoneListInfo, httpOptions);
+    return this.http.post(this.ip+'/leave/load/doneList', getLoadDoneListInfo, httpOptions);
   }
   public getLoadSelfList(username, pageIndex = 1, pageSize = 10){
     console.log("开始post"+username);
@@ -43,7 +52,7 @@ export class EnterService implements OnInit{
       .set("username", username)
       .set("page", pageIndex.toString())
       .set("pageSize", pageSize.toString());
-    return this.http.post("http://localhost:8080/leave/load/selfList", getLoadDoneListInfo, httpOptions);
+    return this.http.post(this.ip+'/leave/load/selfList', getLoadDoneListInfo, httpOptions);
   }
   public addinfopicture(name, dynasty, place, type, pathdoc, pathpreview, ifcheck,tag_seq,ifcheckdown,ispic,pathmovie){
     console.log(name);
@@ -59,19 +68,19 @@ export class EnterService implements OnInit{
     set("ifcheckdown",ifcheckdown).
     set("ispic",ispic).
     set("pathmovie",pathmovie);
-    return this.http.post('http://localhost:8080/leave/add/addinfo', pictureinfo, httpOptions);
+    return this.http.post(this.ip+'/leave/add/addinfo', pictureinfo, httpOptions);
   }
   public getLoadDropList(username, pageIndex = 1, pageSize = 10){
     const getLoadDropList = new HttpParams()
     .set("username", username)
     .set("page", pageIndex.toString())
     .set("pageSize", pageSize.toString());
-  return this.http.post("http://localhost:8080/leave/apply/draftList", getLoadDropList, httpOptions);
+  return this.http.post(this.ip+'/leave/apply/draftList', getLoadDropList, httpOptions);
   }
   public deletInfo(uid){
     console.log("delet");
     const deleteInfo = new HttpParams().set("uid", uid);
-    return this.http.post('http://localhost:8080/leave/apply/delete', deleteInfo, httpOptions);
+    return this.http.post(this.ip+'/leave/apply/delete', deleteInfo, httpOptions);
   }
   public updateInfo(params){
     console.log(params)
@@ -81,7 +90,7 @@ export class EnterService implements OnInit{
     }
     queryString = queryString.substr(0, queryString.length - 1);
     const updateInfo = new HttpParams({fromString : queryString});
-    return this.http.post("http://localhost:8080/leave/apply/modify", updateInfo, httpOptions);
+    return this.http.post(this.ip+'/leave/apply/modify', updateInfo, httpOptions);
 
   }
   public searchinfo(name,tag,username,pageIndex,pageSize){
@@ -90,27 +99,27 @@ export class EnterService implements OnInit{
     set("username", username)
     .set("page", pageIndex.toString())
     .set("pageSize", pageSize.toString());
-    return this.http.post('http://localhost:8080/leave/searchinfo/searchlist', searchinfo, httpOptions);
+    return this.http.post(this.ip+'/leave/searchinfo/searchlist', searchinfo, httpOptions);
   }
   public searchtags(tag_seq,username,pageIndex,pageSize){
     const searchtags = new HttpParams().set('tag_seq',tag_seq).
     set("username", username)
     .set("page", pageIndex.toString())
     .set("pageSize", pageSize.toString());
-    return this.http.post('http://localhost:8080/leave/searchinfo/searchtags', searchtags, httpOptions);
+    return this.http.post(this.ip+'/leave/searchinfo/searchtags', searchtags, httpOptions);
   }
   public DownloadPic(pathpic){
     
     const downloadinfo = new HttpParams().set('pathpic',pathpic);
-    return this.http.post('http://localhost:8080/leave/download/pic', downloadinfo, httpOptions)
+    return this.http.post(this.ip+'/leave/download/pic', downloadinfo, httpOptions)
 
   }
   public totaluser(){
     const totaluserinfo = new HttpParams()
-    return this.http.post('http://localhost:8080/leave/statistics/totaluser', totaluserinfo, httpOptions)
+    return this.http.post(this.ip+'/leave/statistics/totaluser', totaluserinfo, httpOptions)
   }
   public totaldoc(){
     const totaldocinfo = new HttpParams()
-    return this.http.post('http://localhost:8080/leave/statistics/totaldoc', totaldocinfo, httpOptions)
+    return this.http.post(this.ip+'/leave/statistics/totaldoc', totaldocinfo, httpOptions)
   }
 }

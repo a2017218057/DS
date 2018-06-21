@@ -6,6 +6,7 @@ import {
   FormControl
 } from '@angular/forms';
 import { EnterService } from '../../../service/enter.service';
+import { IpService } from '../../../service/ip.service';
 @Component({
   selector: 'app-updateinfo',
   templateUrl: './updateinfo.component.html',
@@ -15,7 +16,7 @@ export class UpdateinfoComponent implements OnInit {
 
   validateFormUpdate: FormGroup;
   @Input() currentData;
-  constructor(private fb: FormBuilder, private enterService: EnterService) {
+  constructor(private fb: FormBuilder, private enterService: EnterService,private ipService: IpService,) {
     
     this.validateFormUpdate = this.fb.group({
       nameUpdate          : [ '', [ Validators.required ]],
@@ -55,7 +56,7 @@ export class UpdateinfoComponent implements OnInit {
     if (this.currentData) {
       // console.log("-----" + JSON.stringify(this.currentData));
       // console.log(this.currentData.startTime);
-      console.log(this.currentData)
+      //console.log(this.currentData)
       //this.c = this.currentData.ifcheck;
       this._name = this.currentData.name;
       this._dynasty = this.currentData.dynasty;
@@ -68,11 +69,11 @@ export class UpdateinfoComponent implements OnInit {
       this._ifcheck = this.currentData.ifcheck;
       this._ifcheckdown = this.currentData.ifcheckdown;
       var arr = this.currentData.tag.split(";");
-      console.log(arr)
+      //console.log(arr)
       this.searchOptions = arr;
-      console.log(this.searchOptions)
+      //console.log(this.searchOptions)
       this.selectedMultipleOption = this.searchOptions;
-      console.log(this.selectedMultipleOption)
+      //console.log(this.selectedMultipleOption)
       this.getFormControl("nameUpdate").markAsDirty();
       this.getFormControl("dynastyUpdate").markAsDirty();
       this.getFormControl("placeUpdate").markAsDirty();
@@ -81,6 +82,7 @@ export class UpdateinfoComponent implements OnInit {
       this.getFormControl("ifcheckdownUpdate").markAsDirty();
     }
   }
+  
   getFormControl(name) {
     return this.validateFormUpdate.controls[ name ];
   }
@@ -160,6 +162,10 @@ export class UpdateinfoComponent implements OnInit {
       return { tagsnumber: true, error: true };
     }
   };
+  /**
+   * 
+   * @param tag_get 
+   */
   change(tag_get: any){
         
     this.tag_seq = ''

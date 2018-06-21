@@ -8,6 +8,7 @@ import {NavigationExtras, Router} from "@angular/router";
 import { EnterService } from '../service/enter.service';
 import { CheckUserService } from '../service/check-user.service';
 import {NzMessageService} from "ng-zorro-antd";
+import { IpService } from '../service/ip.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
                private router: Router,
                private enterService: EnterService,
                private checkUserService: CheckUserService,
+               private ipService: IpService,
                private _message: NzMessageService
                ) {
     this.validateForm = fb.group({
@@ -31,9 +33,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("LoginPageComponent ngOnInit");
+    //console.log("LoginPageComponent ngOnInit");
+    //console.log(this.ipService.visit())
   }
 
+  analysis(){
+    this.router.navigate(['tongji']);
+  }
   /**
    * 登录
    * @private

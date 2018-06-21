@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
 
       this.tag_seq = tag_get;
       this.name_seq = name_get;
-      console.log(this.name_seq+"和"+this.tag_seq)
+      //console.log(this.name_seq+"和"+this.tag_seq)
       let navigationExtras: NavigationExtras = {
         queryParams: { 'tag': this.tag_seq,'name':this.name_seq},
       };
